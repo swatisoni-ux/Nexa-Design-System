@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0..1,0" />
+<link rel="stylesheet" href="./nexa-tokens.css">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  :root,[data-theme]{
+    --dur-1:100ms; --dur-2:150ms; --dur-3:250ms; --dur-4:400ms; --dur-dismiss:2400ms;
+    --ease-standard:cubic-bezier(0.2,0,0,1); --ease-entrance:cubic-bezier(0,0,0.2,1); --ease-exit:cubic-bezier(0.4,0,1,1);
+    --z-base:0; --z-raised:10; --z-nav:100; --z-dropdown:200; --z-overlay:300; --z-toast:400; --z-tooltip:500;
+    --shadow-accent:var(--sem-elevation-raised);
+    --r-sm:6px; --r-md:10px; --r-lg:16px; --r-pill:999px; --r-full:50%;
+    --t-micro:11px; --t-xs:12px; --t-sm:13px; --t-md:14px; --t-lg:16px; --t-xl:20px; --t-2xl:28px;
+    --icon-sm:16px; --icon-md:18px; --icon-lg:20px; --icon-xl:22px;
+    --s0:2px; --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
+  }
+  @keyframes om-pop-in{from{opacity:0;transform:translateY(-4px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+  @keyframes om-toast-in{from{opacity:0;transform:translateX(-50%) translateY(8px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+  button,a,select,input,[role="button"]{transition:background-color var(--dur-1) var(--ease-standard),color var(--dur-1) var(--ease-standard),border-color var(--dur-1) var(--ease-standard),box-shadow var(--dur-2) var(--ease-standard);}
+  @media (prefers-reduced-motion:reduce){*{transition-duration:1ms !important;animation-duration:1ms !important;}}
+  a{color:var(--sem-text-link);text-decoration:none;}
+  a:hover{color:var(--sem-action-primary-hover);}
+  .ico{font-family:'Material Symbols Outlined';font-weight:300;font-style:normal;line-height:1;letter-spacing:normal;white-space:nowrap;-webkit-font-smoothing:antialiased;user-select:none;}
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-thumb{background:var(--sem-border-scrollbar);border-radius:999px;border:2px solid transparent;background-clip:content-box;}
+  select:focus,input:focus{outline:2px solid var(--sem-border-focus);outline-offset:1px;}
+</style>
+</helmet>
+<div data-theme="{{ themeAttr }}" style="height:100vh;display:flex;flex-direction:column;font-family:var(--font-sans);color:var(--sem-text-primary);background:var(--sem-surface-canvas);overflow:hidden;">
+
+  <!-- GLOBAL HEADER -->
+  <header style="height:64px;flex:0 0 64px;display:flex;align-items:center;gap:24px;padding:0 24px;background:var(--sem-surface-primary);box-shadow:0 1px 0 var(--sem-border-default);z-index:var(--z-nav);">
+    <a href="#" onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;flex:0 0 auto;">
+      <span style="width:32px;height:32px;border-radius:10px;background:var(--sem-action-primary);display:flex;align-items:center;justify-content:center;color:var(--sem-text-on-accent);font-family:var(--font-display);font-weight:800;font-size:16px;">N</span>
+      <span style="font-family:var(--font-display);font-weight:800;font-size:20px;letter-spacing:-0.03em;color:var(--sem-text-primary);">Nexa</span>
+    </a>
+    <div style="flex:1;max-width:560px;margin:0 auto;position:relative;">
+      <span class="ico" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:19px;color:var(--sem-text-tertiary);">search</span>
+      <input value="{{ search }}" onInput="{{ setSearch }}" placeholder="Search Claim #, Audit ID, or MR Request ID" style="width:100%;height:40px;padding:0 14px 0 42px;border:none;box-shadow:inset 0 0 0 1px var(--sem-border-interactive);border-radius:12px;font-family:inherit;font-size:14px;background:var(--sem-surface-field);color:inherit;" />
+      <sc-if value="{{ hasSuggestions }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:48px;left:0;right:0;background:var(--sem-surface-primary);border-radius:16px;box-shadow:var(--sem-elevation-floating);overflow:hidden;z-index:var(--z-dropdown);transform-origin:top center;animation:om-pop-in var(--dur-2) var(--ease-entrance) both;">
+          <sc-for list="{{ suggestions }}" as="sug" hint-placeholder-count="3">
+            <div onClick="{{ sug.onPick }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;box-shadow:inset 0 -1px 0 var(--sem-border-subtle);" style-hover="background:var(--sem-surface-selected);">
+              <span class="ico" style="font-size:18px;color:var(--sem-action-primary);">{{ sug.icon }}</span>
+              <div style="flex:1;min-width:0;">
+                <div style="font-family:var(--font-mono);font-size:13px;font-weight:500;">{{ sug.id }}</div>
+                <div style="font-size:12px;color:var(--sem-text-tertiary);">{{ sug.sub }}</div>
+              </div>
+              <span style="font-size:11px;font-weight:600;color:var(--sem-text-tertiary);text-transform:uppercase;letter-spacing:0.04em;">{{ sug.kind }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;flex:0 0 auto;">
+      <button onClick="{{ toggleTheme }}" title="{{ themeTitle }}" style="width:40px;height:40px;border:none;background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--sem-text-secondary);" style-hover="background:var(--sem-action-secondary-hover);">
+        <span class="ico" style="font-size:20px;">{{ themeIcon }}</span>
+      </button>
+      <button onClick="{{ ringBell }}" title="Notifications" style="position:relative;width:40px;height:40px;border:none;background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--sem-text-secondary);" style-hover="background:var(--sem-action-secondary-hover);">
+        <span class="ico" style="font-size:22px;">notifications</span>
+        <sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}">
+          <span style="position:absolute;top:8px;right:9px;width:9px;height:9px;border-radius:50%;background:var(--sem-status-error-strong);border:2px solid var(--sem-surface-primary);"></span>
+        </sc-if>
+      </button>
+      <button onClick="{{ toggleProfile }}" style="display:flex;align-items:center;gap:12px;border:none;background:transparent;padding:4px 10px 4px 4px;border-radius:999px;cursor:pointer;" style-hover="background:var(--sem-action-secondary-hover);">
+        <span title="Drop a photo of Dana Lewis, RN" style="position:relative;width:36px;height:36px;flex:0 0 auto;border-radius:50%;overflow:hidden;background:var(--sem-surface-avatar);color:var(--sem-text-avatar);font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;">
+          <img src="uploads/pasted-1785815961108-0.png" alt="Dana Lewis, RN" style="width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block;" />
+        </span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2;">
+          <span style="font-size:13px;font-weight:600;">Dana Lewis, RN</span>
+          <span style="font-size:11px;color:var(--sem-text-tertiary);">Clinical Auditor</span>
+        </span>
+        <span class="ico" style="font-size:18px;color:var(--sem-text-tertiary);">expand_more</span>
+      </button>
+      <sc-if value="{{ profileOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:60px;right:20px;width:208px;background:var(--sem-surface-primary);border-radius:16px;box-shadow:var(--sem-elevation-floating);overflow:hidden;z-index:var(--z-dropdown);transform-origin:top center;animation:om-pop-in var(--dur-2) var(--ease-entrance) both;">
+          <div style="padding:14px 16px;box-shadow:inset 0 -1px 0 var(--sem-border-subtle);">
+            <div style="font-size:13px;font-weight:600;">Dana Lewis, RN</div>
+            <div style="font-size:12px;color:var(--sem-text-tertiary);">dana.lewis@nexa.health</div>
+          </div>
+          <div onClick="{{ toggleProfile }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;font-size:14px;" style-hover="background:var(--sem-action-secondary-hover);"><span class="ico" style="font-size:18px;color:var(--sem-text-tertiary);">person</span>Profile</div>
+          <div onClick="{{ toggleProfile }}" style="display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;font-size:14px;box-shadow:inset 0 1px 0 var(--sem-border-subtle);color:var(--sem-status-error-fg);" style-hover="background:var(--sem-status-error-bg);"><span class="ico" style="font-size:18px;">logout</span>Logout</div>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+
+  <div style="flex:1;display:flex;min-height:0;">
+
+    <!-- LEFT NAV -->
+    <nav style="{{ navStyle }}">
+      <button onClick="{{ toggleNav }}" style="{{ navToggleStyle }}" style-hover="background:var(--sem-action-secondary-hover);">
+        <span class="ico" style="font-size:22px;">{{ navToggleIcon }}</span>
+        <sc-if value="{{ navExpanded }}" hint-placeholder-val="{{ true }}"><span style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--sem-text-tertiary);">Collapse</span></sc-if>
+      </button>
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:6px 8px 12px;">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="10">
+          <div onClick="{{ item.onClick }}" title="{{ item.label }}" style="{{ item.style }}">
+            <span class="ico" style="{{ item.iconStyle }}">{{ item.icon }}</span>
+            <sc-if value="{{ navExpanded }}" hint-placeholder-val="{{ true }}"><span style="{{ item.labelStyle }}">{{ item.label }}</span></sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main style="flex:1;min-width:0;overflow-y:auto;display:flex;flex-direction:column;">
+      <!-- PAGE HEADER -->
+      <div style="padding:28px 32px 0;flex:0 0 auto;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sem-text-tertiary);margin-bottom:10px;">
+          <a href="#" onClick="{{ goHome }}" style="color:var(--sem-text-tertiary);">Home</a>
+          <span class="ico" style="font-size:16px;">chevron_right</span>
+          <span style="color:var(--sem-text-secondary);font-weight:600;">My Inventory</span>
+        </div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <div>
+            <h1 style="margin:0;font-family:var(--font-display);font-size:30px;font-weight:800;letter-spacing:-0.035em;color:var(--sem-text-primary);">My Inventory</h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div style="padding:18px 32px 0;flex:0 0 auto;box-shadow:inset 0 -1px 0 var(--sem-border-default);display:flex;gap:6px;">
+        <button onClick="{{ selectMrr }}" style="{{ tabMrrStyle }}">
+          <span class="ico" style="font-size:20px;">description</span>
+          Medical Record Review
+          <span style="{{ tabMrrBadge }}">{{ mrrCount }}</span>
+        </button>
+        <button onClick="{{ selectAudit }}" style="{{ tabAuditStyle }}">
+          <span class="ico" style="font-size:20px;">fact_check</span>
+          Audit Review
+          <span style="{{ tabAuditBadge }}">{{ auditCount }}</span>
+        </button>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div style="padding:20px 32px 4px;flex:0 0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="font-size:14px;font-weight:600;color:var(--sem-text-primary);margin-right:auto;">{{ activeTypeLabel }}</div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sem-text-tertiary);">
+          <span class="ico" style="font-size:18px;">swap_vert</span>
+          <select value="{{ sortBy }}" onChange="{{ setSort }}" style="height:36px;border:none;box-shadow:inset 0 0 0 1px var(--sem-border-interactive);border-radius:10px;background:var(--sem-surface-primary);font-family:inherit;font-size:13px;padding:0 32px 0 12px;color:inherit;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;">
+            <option value="sla">Sort: SLA (soonest)</option>
+            <option value="due">Sort: Due date</option>
+            <option value="amount">Sort: Amount (high→low)</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- QUEUE -->
+      <div style="padding:8px 32px 40px;flex:1;overflow-x:auto;">
+        <div style="display:grid;grid-template-columns:1fr;gap:16px;padding-top:16px;min-width:min-content;">
+          <sc-for list="{{ pinnedCards }}" as="card" hint-placeholder-count="2"><dc-import name="CardV2" card="{{ card }}" hint-size="100%,240px"></dc-import></sc-for>
+          <sc-for list="{{ remainingCards }}" as="card" hint-placeholder-count="4"><dc-import name="CardV2" card="{{ card }}" hint-size="100%,240px"></dc-import></sc-for>
+        </div>
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:60px 20px;color:var(--sem-text-tertiary);">
+            <span class="ico" style="font-size:44px;color:var(--sem-text-disabled);">inbox</span>
+            <p style="margin:12px 0 0;font-size:16px;font-weight:600;color:var(--sem-text-tertiary);">No matching assignments</p>
+            <p style="margin:4px 0 0;font-size:13px;">Try clearing the filter or search.</p>
+          </div>
+        </sc-if>
+      </div>
+    </main>
+  </div>
+
+  <!-- TOAST -->
+  <sc-if value="{{ toastVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--sem-surface-inverted);color:var(--sem-text-on-inverted);padding:13px 22px;border-radius:14px;box-shadow:var(--sem-elevation-overlay);font-size:14px;display:flex;align-items:center;gap:12px;z-index:var(--z-toast);animation:om-toast-in var(--dur-3) var(--ease-entrance) both;">
+      <span class="ico" style="font-size:20px;color:var(--sem-icon-on-inverted);">check_circle</span>{{ toastText }}
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(p){
+    super(p);
+    let collapsed = false, theme = 'light';
+    try { collapsed = localStorage.getItem('nexa.navCollapsed') === '1'; } catch(e){}
+    try { const t = localStorage.getItem('nexa.theme'); if (t==='dark'||t==='light') theme = t; } catch(e){}
+    this.state = {
+      tab: 'mrr', theme, navCollapsed: collapsed, sortBy: 'sla', filter: 'all',
+      search: '', expanded: {}, pins: {}, profileOpen: false, unread: true,
+      toast: null,
+    };
+    this.mrr = [
+      {id:'MR-2026-004821',status:'In Progress',reviewType:'DRG',days:-1,due:'Jul 22, 2026',date2:'Jul 15, 2026',claim:'CLM-88342119',paid:'$18,240.00',paidDate:'May 30, 2026',provider:'Mercy General Hospital',member:'R. Okafor',pinned:true},
+      {id:'MR-2026-004833',status:'In Progress',reviewType:'Itemized Bill',days:1,due:'Jul 24, 2026',date2:'Jul 17, 2026',claim:'CLM-88344201',paid:'$6,905.50',paidDate:'Jun 02, 2026',provider:"St. Luke's Medical Center",member:'T. Nguyen',pinned:true},
+      {id:'MR-2026-004840',status:'New',reviewType:'Clinical Validation',days:3,due:'Jul 26, 2026',date2:'Jul 18, 2026',claim:'CLM-88347756',paid:'$2,310.00',paidDate:'Jun 05, 2026',provider:'Riverside Community Hosp.',member:'A. Delgado'},
+      {id:'MR-2026-004855',status:'In Progress',reviewType:'DRG',days:4,due:'Jul 27, 2026',date2:'Jul 19, 2026',claim:'CLM-88349910',paid:'$41,780.25',paidDate:'Jun 08, 2026',provider:'Northpoint Health System',member:'J. Carter'},
+      {id:'MR-2026-004861',status:'On Hold',reviewType:'DRG',days:6,due:'Jul 29, 2026',date2:'Jul 20, 2026',claim:'CLM-88351442',paid:'$9,145.00',paidDate:'Jun 10, 2026',provider:'Valley Presbyterian',member:'M. Rossi'},
+      {id:'MR-2026-004870',status:'New',reviewType:'Itemized Bill',days:2,due:'Jul 25, 2026',date2:'Jul 19, 2026',claim:'CLM-88352901',paid:'$13,600.00',paidDate:'Jun 11, 2026',provider:'Cedar Sinai Regional',member:'K. Park'},
+      {id:'MR-2026-004884',status:'New',reviewType:'Clinical Validation',days:8,due:'Jul 31, 2026',date2:'Jul 22, 2026',claim:'CLM-88355120',paid:'$780.00',paidDate:'Jun 14, 2026',provider:'Grandview Medical',member:'L. Ahmed'},
+    ];
+    this.audit = [
+      {id:'AUD-77-091204',auditType:'DRG Validation',status:'Findings Draft',days:0,due:'Jul 23, 2026',date2:'Jul 10, 2026',amount:'$12,480.00',amountNum:12480,claim:'CLM-88330045',paid:'$34,900.00',paidDate:'May 20, 2026',provider:'Mercy General Hospital',member:'D. Foster',queryId:'Q-40912',project:'PRJ-DRG-26',pinned:true,exception:'SLA due today'},
+      {id:'AUD-77-091188',auditType:'Clinical Chart',status:'In Progress',days:2,due:'Jul 25, 2026',date2:'Jul 09, 2026',amount:'$7,220.00',amountNum:7220,claim:'CLM-88329901',paid:'$21,050.00',paidDate:'May 18, 2026',provider:'Highland Park Medical',member:'S. Bright',queryId:'Q-40887',project:'PRJ-CCR-26',pinned:true},
+      {id:'AUD-77-091247',auditType:'Short Stay',status:'Pending Clinical',days:-2,due:'Jul 21, 2026',date2:'Jul 05, 2026',amount:'$2,110.00',amountNum:2110,claim:'CLM-88328815',paid:'$8,760.00',paidDate:'May 15, 2026',provider:'Riverside Community Hosp.',member:'N. Vega',queryId:'Q-40801',project:'PRJ-SS-26',exception:'Overdue by 2 days'},
+      {id:'AUD-77-091233',auditType:'Readmission',status:'Not Started',days:5,due:'Jul 28, 2026',date2:'Jul 12, 2026',amount:'$3,540.00',amountNum:3540,claim:'CLM-88331277',paid:'$15,300.00',paidDate:'May 22, 2026',provider:"St. Luke's Medical Center",member:'P. Grant',queryId:'Q-40955',project:'PRJ-RDM-26'},
+      {id:'AUD-77-091260',auditType:'DRG Validation',status:'Ready to Submit',days:4,due:'Jul 27, 2026',date2:'Jul 11, 2026',amount:'$19,905.00',amountNum:19905,claim:'CLM-88332440',paid:'$52,400.00',paidDate:'May 25, 2026',provider:'Northpoint Health System',member:'C. Ellis',queryId:'Q-41002',project:'PRJ-DRG-26'},
+      {id:'AUD-77-091271',auditType:'Clinical Chart',status:'In Progress',days:1,due:'Jul 24, 2026',date2:'Jul 13, 2026',amount:'$5,015.00',amountNum:5015,claim:'CLM-88333901',paid:'$11,240.00',paidDate:'May 27, 2026',provider:'Valley Presbyterian',member:'B. Iyer',queryId:'Q-41044',project:'PRJ-CCR-26'},
+      {id:'AUD-77-091289',auditType:'Readmission',status:'Not Started',days:7,due:'Jul 30, 2026',date2:'Jul 15, 2026',amount:'$8,600.00',amountNum:8600,claim:'CLM-88335120',paid:'$27,800.00',paidDate:'May 29, 2026',provider:'Cedar Sinai Regional',member:'H. Ono',queryId:'Q-41090',project:'PRJ-RDM-26'},
+    ];
+    this.STATUS = {
+      'New':'gray','In Progress':'blue','On Hold':'amber','Completed':'green',
+      'Not Started':'gray','Pending Clinical':'amber','Findings Draft':'violet','Ready to Submit':'green',
+    };
+    this.PAL = {
+      green:{bg:'var(--sem-status-success-bg)',fg:'var(--sem-status-success-fg)'},
+      amber:{bg:'var(--sem-status-warning-bg)',fg:'var(--sem-status-warning-fg)'},
+      red:{bg:'var(--sem-status-error-bg)',fg:'var(--sem-status-error-fg)'},
+      blue:{bg:'var(--sem-status-info-bg)',fg:'var(--sem-status-info-fg)'},
+      violet:{bg:'var(--sem-status-review-bg)',fg:'var(--sem-status-review-fg)'},
+      gray:{bg:'var(--sem-status-neutral-bg)',fg:'var(--sem-status-neutral-fg)'},
+    };
+  }
+  toggleTheme(){
+    const t = this.state.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('nexa.theme', t); } catch(e){}
+    this.setState({theme:t});
+  }
+  showToast(msg){
+    this.setState({toast:msg});
+    clearTimeout(this._t);
+    this._t = setTimeout(()=>this.setState({toast:null}), 2200);
+  }
+  copy(text,label){
+    try{ navigator.clipboard && navigator.clipboard.writeText(text); }catch(e){}
+    this.showToast(label+' copied  ·  '+text);
+  }
+  isPinned(item){ const o=this.state.pins[item.id]; return o===undefined?!!item.pinned:o; }
+  togglePin(item){
+    const cur=this.isPinned(item);
+    this.setState(s=>({pins:{...s.pins,[item.id]:!cur}}));
+    this.showToast(!cur?'Assignment pinned':'Assignment unpinned');
+  }
+  toggleExpand(id){ this.setState(s=>({expanded:{...s.expanded,[id]:!s.expanded[id]}})); }
+  toggleNav(){
+    const nc=!this.state.navCollapsed;
+    try{ localStorage.setItem('nexa.navCollapsed', nc?'1':'0'); }catch(e){}
+    this.setState({navCollapsed:nc});
+  }
+  slaMeta(days){
+    if(days<0) return {pal:'red',label:Math.abs(days)+'d overdue',icon:'error'};
+    if(days===0) return {pal:'amber',label:'Due today',icon:'schedule'};
+    if(days<=2) return {pal:'amber',label:days+'d left',icon:'schedule'};
+    return {pal:'green',label:days+'d left',icon:'schedule'};
+  }
+  decorate(item, isAudit){
+    const pinned=this.isPinned(item);
+    const sm=this.PAL[this.STATUS[item.status]||'gray'];
+    const sla=this.slaMeta(item.days);
+    const slp=this.PAL[sla.pal];
+    const expanded=!!this.state.expanded[item.id];
+    const chip={display:'inline-flex',alignItems:'center',padding:'5px 11px',borderRadius:'999px',fontSize:'12px',fontWeight:600,whiteSpace:'nowrap'};
+    const c={
+      ...item, pinned, isAudit, expanded,
+      typeLabel: isAudit?item.auditType:item.reviewType,
+      typeCaption: isAudit?'Audit Type':'Review Type',
+      date2Label: isAudit?'Created':'Requested',
+      showAmount: isAudit,
+      hasException: !!item.exception,
+      primaryLabel: isAudit?'Process Audit':'Begin Review',
+      primaryIcon: isAudit?'gavel':'play_arrow',
+      slaLabel: sla.label, slaIcon: sla.icon,
+      dueStyle:{fontSize:'13px',fontWeight:700,whiteSpace:'nowrap',color:slp.fg},
+      moneyStyle:{fontFamily:'var(--font-display)',fontSize:'17px',fontWeight:700,letterSpacing:'-0.03em',color:'var(--sem-text-primary)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',textAlign:'left'},
+      moneyAccentStyle:{fontFamily:'var(--font-display)',fontSize:'17px',fontWeight:700,letterSpacing:'-0.03em',color:'var(--sem-text-link)',whiteSpace:'nowrap',textAlign:'left'},
+      gridStyle:{flex:1,minWidth:0,display:'grid',gap:'12px 24px',gridTemplateColumns:isAudit?'minmax(min-content,0.8fr) minmax(min-content,1fr) minmax(88px,1.4fr) minmax(min-content,1fr)':'minmax(min-content,0.7fr) minmax(min-content,0.9fr) minmax(80px,1.6fr) minmax(64px,1fr) minmax(min-content,0.8fr)'},
+      mainRowStyle:{display:'flex',gap:'24px',alignItems:isAudit?'flex-start':'center'},
+      isOverdue: item.days<0,
+      overdueTooltip: item.days<0 ? ('Overdue by '+Math.abs(item.days)+' day'+(Math.abs(item.days)===1?'':'s')) : '',
+      showOverdueTip: this.state.tipId===item.id,
+      onOverdueEnter: ()=>this.setState({tipId:item.id}),
+      onOverdueLeave: ()=>this.setState({tipId:null}),
+      overdueTipStyle:{position:'absolute',bottom:'calc(100% + 8px)',left:'50%',transform:'translateX(-50%)',
+        background:'var(--sem-surface-inverted)',color:'var(--sem-text-on-inverted)',fontSize:'12px',fontWeight:500,lineHeight:1.2,
+        padding:'7px 11px',borderRadius:'8px',whiteSpace:'nowrap',boxShadow:'var(--sem-elevation-floating)',
+        pointerEvents:'none',zIndex:500},
+      detailsLabel: expanded?'Hide details':'More details',
+      detailsIcon: expanded?'expand_less':'expand_more',
+      statusChipStyle:{...chip,background:sm.bg,color:sm.fg},
+      statusDotStyle:{display:'none'},
+      slaChipStyle:{...chip,background:slp.bg,color:slp.fg},
+      cardStyle:{fontFamily:'var(--font-sans)',color:'var(--sem-text-primary)',background:'var(--sem-surface-primary)',
+        borderRadius:'16px',padding:'24px',display:'flex',flexDirection:'column',gap:'16px',
+        boxShadow:pinned ? 'var(--sem-elevation-raised)' : 'var(--sem-elevation-resting)'},
+      pinBtnStyle:{width:'34px',height:'34px',border:'none',
+        boxShadow:pinned?'none':'inset 0 0 0 1px var(--sem-border-interactive)',
+        background:pinned?'var(--sem-surface-selected)':'transparent',borderRadius:'50%',cursor:'pointer',
+        display:'flex',alignItems:'center',justifyContent:'center',
+        color:pinned?'var(--sem-text-link)':'var(--sem-text-tertiary)',flex:'0 0 auto'},
+      pinIconStyle:{fontSize:'18px',fontVariationSettings:pinned?"'FILL' 1":"'FILL' 0"},
+      pinTitle: pinned?'Unpin assignment':'Pin assignment',
+      onPin: ()=>this.togglePin(item),
+      onPrimary: ()=>this.showToast((isAudit?'Opening audit ':'Opening review ')+item.id),
+      onCopyId: ()=>this.copy(item.id, isAudit?'Audit ID':'MR Request ID'),
+      onCopyClaim: ()=>this.copy(item.claim,'Claim #'),
+      onToggle: ()=>this.toggleExpand(item.id),
+    };
+    return c;
+  }
+  activeList(){ return this.state.tab==='audit'?this.audit:this.mrr; }
+  process(){
+    const isAudit=this.state.tab==='audit';
+    const {sortBy,filter,search}=this.state;
+    let list=this.activeList().map(x=>this.decorate(x,isAudit));
+    const q=search.trim().toLowerCase();
+    if(q) list=list.filter(c=>[c.id,c.claim,c.provider,c.member,c.queryId,c.project].some(v=>v&&(''+v).toLowerCase().includes(q)));
+    if(filter!=='all') list=list.filter(c=>c.status===filter);
+    const cmp={
+      sla:(a,b)=>a.days-b.days,
+      due:(a,b)=>a.days-b.days,
+      amount:(a,b)=>(b.amountNum||0)-(a.amountNum||0),
+    }[sortBy];
+    list.sort(cmp);
+    const pinned=list.filter(c=>c.pinned);
+    const remaining=list.filter(c=>!c.pinned);
+    return {pinned,remaining,shown:list.length};
+  }
+  navItemsList(){
+    const items=['Dashboard','Provider Portal','Nexa Clinical','Relationship Management','Work Queue','My Inventory','Refund Requests','Concept Management','Insights & Analytics','Reporting','Extracts','Recovery Posting','Collections','Update Audits','Update Medical Records','Update Query Results','Administration'];
+    const icons={'Dashboard':'dashboard','Provider Portal':'apartment','Nexa Clinical':'clinical_notes','Relationship Management':'handshake','Work Queue':'list_alt','My Inventory':'inventory_2','Refund Requests':'currency_exchange','Concept Management':'category','Insights & Analytics':'insights','Reporting':'assessment','Extracts':'download','Recovery Posting':'account_balance','Collections':'request_quote','Update Audits':'rule','Update Medical Records':'edit_document','Update Query Results':'quiz','Administration':'settings'};
+    const collapsed=this.state.navCollapsed;
+    return items.map(label=>{
+      const active=label==='My Inventory';
+      return {
+        label, icon:icons[label], active,
+        onClick: active?(()=>{}):(()=>this.showToast(label+' is not available in this view')),
+        style:{display:'flex',alignItems:'center',gap:'12px',height:'40px',padding:collapsed?'0 10px':'0 12px',
+          margin:'2px 0',borderRadius:'10px',fontSize:'13.5px',position:'relative',
+          justifyContent:collapsed?'center':'flex-start',
+          cursor:active?'default':'not-allowed',
+          color:active?'var(--sem-text-link)':'var(--sem-text-disabled)',
+          background:active?'var(--sem-surface-selected)':'transparent',
+          fontWeight:active?600:400},
+        iconStyle:{fontSize:'21px',flex:'0 0 auto',color:active?'var(--sem-text-link)':'var(--sem-text-disabled)'},
+        labelStyle:{whiteSpace:'nowrap'},
+      };
+    });
+  }
+  renderVals(){
+    const s=this.state;
+    const isAudit=s.tab==='audit';
+    const {pinned,remaining,shown}=this.process();
+    const q=s.search.trim().toLowerCase();
+    const suggestions = q? [...this.mrr.map(x=>({...x,_a:false})),...this.audit.map(x=>({...x,_a:true}))]
+        .filter(x=>[x.id,x.claim].some(v=>(''+v).toLowerCase().includes(q)))
+        .slice(0,5)
+        .map(x=>({id:x.id,sub:x.provider+' · '+x.member,kind:x._a?'Audit':'MRR',icon:x._a?'fact_check':'description',onPick:()=>{this.setState({tab:x._a?'audit':'mrr',search:x.id});}}))
+      : [];
+    const mrrCount=this.mrr.length, auditCount=this.audit.length;
+    const activeCount=isAudit?auditCount:mrrCount;
+
+    const tabBase={position:'relative',border:'none',background:'transparent',cursor:'pointer',fontFamily:'inherit',fontSize:'15px',padding:'12px 16px',display:'flex',alignItems:'center',gap:'10px'};
+    const tabOn={...tabBase,color:'var(--sem-text-primary)',fontWeight:600,borderBottom:'3px solid var(--sem-action-primary)',marginBottom:'-1px'};
+    const tabOff={...tabBase,color:'var(--sem-text-tertiary)',fontWeight:500,borderBottom:'3px solid transparent',marginBottom:'-1px'};
+    const badgeBase={minWidth:'22px',height:'22px',padding:'0 8px',borderRadius:'999px',fontSize:'12px',fontWeight:600,display:'inline-flex',alignItems:'center',justifyContent:'center'};
+    const badgeOn={...badgeBase,background:'var(--sem-action-primary)',color:'var(--sem-text-on-accent)'};
+    const badgeOff={...badgeBase,background:'var(--sem-surface-chip)',color:'var(--sem-text-tertiary)'};
+
+    const statuses=[...new Set(this.activeList().map(x=>x.status))];
+    const filterOptions=[{value:'all',label:'All statuses'},...statuses.map(x=>({value:x,label:x}))];
+
+    return {
+      goHome:(e)=>{e&&e.preventDefault&&e.preventDefault(); this.setState({tab:'mrr',filter:'all',search:''});},
+      search:s.search,
+      setSearch:(e)=>this.setState({search:e.target.value}),
+      suggestions, hasSuggestions: suggestions.length>0,
+      hasUnread:s.unread, ringBell:()=>{this.setState({unread:false}); this.showToast('3 notifications · all marked read');},
+      profileOpen:s.profileOpen, toggleProfile:()=>this.setState(st=>({profileOpen:!st.profileOpen})),
+      navExpanded:!s.navCollapsed,
+      navStyle:{flex:'0 0 auto',background:'var(--sem-surface-primary)',boxShadow:'inset -1px 0 0 var(--sem-border-default)',display:'flex',flexDirection:'column',transition:'width var(--dur-3) var(--ease-standard)',overflow:'hidden',width:s.navCollapsed?'64px':'240px'},
+      navToggleStyle:{height:'48px',border:'none',background:'transparent',cursor:'pointer',display:'flex',alignItems:'center',gap:'12px',padding:'0 20px',color:'var(--sem-text-secondary)',flex:'0 0 auto',justifyContent:s.navCollapsed?'center':'flex-start'},
+      navToggleIcon:s.navCollapsed?'menu':'menu_open',
+      navItems:this.navItemsList(),
+      toggleNav:()=>this.toggleNav(),
+      themeAttr: s.theme,
+      themeIcon: s.theme==='dark' ? 'light_mode' : 'dark_mode',
+      themeTitle: s.theme==='dark' ? 'Switch to light theme' : 'Switch to dark theme',
+      toggleTheme: ()=>this.toggleTheme(),
+      workloadSummary:`${mrrCount+auditCount} active assignments — ${mrrCount} record reviews, ${auditCount} claim audits`,
+      allocatedDate:'Jul 23, 2026, 7:00 AM',
+      selectMrr:()=>this.setState({tab:'mrr',filter:'all'}),
+      selectAudit:()=>this.setState({tab:'audit',filter:'all'}),
+      mrrCount, auditCount,
+      tabMrrStyle:isAudit?tabOff:tabOn, tabAuditStyle:isAudit?tabOn:tabOff,
+      tabMrrBadge:isAudit?badgeOff:badgeOn, tabAuditBadge:isAudit?badgeOn:badgeOff,
+      shownCount:shown, totalCount:activeCount,
+      activeTypeLabel:isAudit?'Audit Review':'Medical Record Review',
+      filterStatus:s.filter, setFilter:(e)=>this.setState({filter:e.target.value}), filterOptions,
+      sortBy:s.sortBy, setSort:(e)=>this.setState({sortBy:e.target.value}),
+      hasPinned:pinned.length>0, pinnedCount:pinned.length, pinnedCards:pinned,
+      remainingCards:remaining, remainingCount:remaining.length, hasRemaining:remaining.length>0,
+      remainingHeading:pinned.length>0?'All other assignments':'All assignments',
+      isEmpty: shown===0,
+      toastVisible:!!s.toast, toastText:s.toast||'',
+    };
+  }
+}
+</script>
+</body>
+</html>

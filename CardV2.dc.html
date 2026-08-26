@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0..1,0" />
+<style>.ico{font-family:'Material Symbols Outlined';font-weight:300;line-height:1;white-space:nowrap;-webkit-font-smoothing:antialiased;user-select:none;}</style>
+</helmet>
+<div style="{{ card.cardStyle }}">
+  <div style="{{ card.mainRowStyle }}">
+
+    <!-- identity -->
+    <div style="display:flex;align-items:center;gap:12px;min-width:0;flex:0 0 240px;">
+      <button onClick="{{ card.onPin }}" title="{{ card.pinTitle }}" style="{{ card.pinBtnStyle }}">
+        <span class="ico" style="{{ card.pinIconStyle }}">push_pin</span>
+      </button>
+      <div style="min-width:0;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:var(--font-mono);font-size:16px;font-weight:600;color:var(--sem-text-primary);letter-spacing:-0.01em;white-space:nowrap;">{{ card.id }}</span>
+          <button onClick="{{ card.onCopyId }}" title="Copy ID" style="width:24px;height:24px;border:none;background:transparent;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--sem-text-tertiary);flex:0 0 auto;" style-hover="background:var(--sem-surface-selected);color:var(--sem-text-link);">
+            <span class="ico" style="font-size:16px;">content_copy</span>
+          </button>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:5px;min-width:0;">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">{{ card.typeCaption }}</span>
+          <span style="font-size:13px;font-weight:600;color:var(--sem-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ card.typeLabel }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- data grid: MRR one row, Audit two rows -->
+    <div style="{{ card.gridStyle }}">
+
+      <!-- due date -->
+      <div style="display:flex;flex-direction:column;gap:5px;min-width:max-content;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Due Date</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="{{ card.dueStyle }}">{{ card.due }}</span>
+          <sc-if value="{{ card.isOverdue }}" hint-placeholder-val="{{ false }}">
+            <span onMouseEnter="{{ card.onOverdueEnter }}" onMouseLeave="{{ card.onOverdueLeave }}" style="position:relative;display:inline-flex;align-items:center;cursor:help;">
+              <span class="ico" style="font-size:18px;color:var(--sem-status-error-strong);">error</span>
+              <sc-if value="{{ card.showOverdueTip }}" hint-placeholder-val="{{ false }}">
+                <span style="{{ card.overdueTipStyle }}">{{ card.overdueTooltip }}</span>
+              </sc-if>
+            </span>
+          </sc-if>
+        </div>
+      </div>
+
+      <!-- claim # -->
+      <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Claim #</span>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span style="font-family:var(--font-mono);font-size:13px;color:var(--sem-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ card.claim }}</span>
+          <button onClick="{{ card.onCopyClaim }}" title="Copy Claim #" style="width:22px;height:22px;border:none;background:transparent;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--sem-text-tertiary);flex:0 0 auto;" style-hover="background:var(--sem-surface-selected);color:var(--sem-text-link);">
+            <span class="ico" style="font-size:16px;">content_copy</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- provider -->
+      <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Provider</span>
+        <span title="{{ card.provider }}" style="font-size:13px;color:var(--sem-text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ card.provider }}</span>
+      </div>
+
+      <!-- member -->
+      <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Member</span>
+        <span title="{{ card.member }}" style="font-size:13px;color:var(--sem-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ card.member }}</span>
+      </div>
+
+      <!-- audit-only: query id -->
+      <sc-if value="{{ card.showAmount }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:5px;min-width:max-content;">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Query ID</span>
+          <span style="font-family:var(--font-mono);font-size:13px;color:var(--sem-text-secondary);white-space:nowrap;">{{ card.queryId }}</span>
+        </div>
+      </sc-if>
+
+      <!-- audit-only: project -->
+      <sc-if value="{{ card.showAmount }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:5px;min-width:max-content;">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Project</span>
+          <span style="font-family:var(--font-mono);font-size:13px;color:var(--sem-text-secondary);white-space:nowrap;">{{ card.project }}</span>
+        </div>
+      </sc-if>
+
+      <!-- claim paid -->
+      <div style="display:flex;flex-direction:column;align-items:stretch;gap:5px;min-width:max-content;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Claim Paid</span>
+        <span style="{{ card.moneyStyle }}">{{ card.paid }}</span>
+      </div>
+
+      <!-- audit-only: audit amount -->
+      <sc-if value="{{ card.showAmount }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:stretch;gap:5px;min-width:max-content;">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--sem-text-tertiary);white-space:nowrap;">Audit Amount</span>
+          <span style="{{ card.moneyAccentStyle }}">{{ card.amount }}</span>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- action -->
+    <div style="display:flex;align-items:center;justify-content:flex-end;flex:0 0 auto;">
+      <button onClick="{{ card.onPrimary }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 18px;border:none;border-radius:11px;background:var(--sem-action-primary);color:var(--sem-text-on-accent);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;" style-hover="background:var(--sem-action-primary-hover);">
+        <span class="ico" style="font-size:18px;">{{ card.primaryIcon }}</span>{{ card.primaryLabel }}
+      </button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1120,&quot;height&quot;:112},&quot;card&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;}}"></script>
+</body>
+</html>

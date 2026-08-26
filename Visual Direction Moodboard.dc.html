@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0..1,0" />
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:oklch(0.97 0.01 200);}
+  html[data-mb-theme="dark"],html[data-mb-theme="dark"] body{background:oklch(0.19 0.014 245);}
+  :root{
+    --mb-env-grad:linear-gradient(150deg, oklch(0.90 0.055 196) 0%, oklch(0.95 0.035 186) 26%, oklch(0.975 0.018 176) 58%, oklch(0.955 0.03 200) 100%);
+    --mb-env-grad-demo:linear-gradient(140deg, oklch(0.90 0.055 196), oklch(0.965 0.02 180));
+    --mb-surface:oklch(0.995 0.002 220); --mb-well:oklch(0.972 0.008 200); --mb-well2:oklch(0.975 0.004 220);
+    --mb-tint:oklch(0.965 0.02 188); --mb-tint-soft:oklch(0.975 0.012 195); --mb-teal-wash:oklch(0.955 0.028 188);
+    --mb-hairline:oklch(0.92 0.008 220); --mb-hairline2:oklch(0.9 0.008 220); --mb-hairline3:oklch(0.88 0.01 220);
+    --mb-track:oklch(0.93 0.008 220); --mb-teal-ring:oklch(0.86 0.03 190); --mb-bar-idle:oklch(0.93 0.022 195);
+    --mb-avatar-bg:oklch(0.82 0.06 190); --mb-avatar-fg:oklch(0.32 0.05 195);
+    --mb-ink950:oklch(0.2 0.025 245); --mb-ink900:oklch(0.22 0.02 248); --mb-ink850:oklch(0.26 0.02 245);
+    --mb-ink800:oklch(0.3 0.02 245); --mb-ink750:oklch(0.34 0.02 242); --mb-ink700:oklch(0.36 0.02 240);
+    --mb-ink680:oklch(0.4 0.02 240); --mb-ink650:oklch(0.42 0.02 240); --mb-ink620:oklch(0.44 0.02 240);
+    --mb-ink600:oklch(0.46 0.02 240); --mb-ink580:oklch(0.48 0.02 240); --mb-ink550:oklch(0.5 0.02 240);
+    --mb-ink520:oklch(0.52 0.02 238); --mb-ink500:oklch(0.55 0.02 235); --mb-ink480:oklch(0.58 0.02 235);
+    --mb-ink450:oklch(0.6 0.02 235); --mb-ink420:oklch(0.62 0.02 235); --mb-ink400:oklch(0.64 0.02 235); --mb-ink380:oklch(0.66 0.02 235);
+    --mb-ink350:oklch(0.72 0.02 235);
+    --mb-teal-700:oklch(0.45 0.09 187); --mb-teal-hover:oklch(0.36 0.08 190); --mb-teal-500:oklch(0.58 0.11 195);
+    --mb-teal-300:oklch(0.72 0.09 190); --mb-teal-icon:oklch(0.5 0.08 190); --mb-on-teal:oklch(0.98 0.015 180);
+    --mb-teal-text:oklch(0.42 0.07 192); --mb-teal-text-strong:oklch(0.34 0.03 215);
+    --mb-success-bg:oklch(0.955 0.035 175); --mb-success-fg:oklch(0.44 0.1 165);
+    --mb-warning-bg:oklch(0.96 0.045 85); --mb-warning-fg:oklch(0.47 0.11 70);
+    --mb-danger-bg:oklch(0.955 0.03 25); --mb-danger-fg:oklch(0.51 0.16 25);
+    --mb-danger-bg-strong:oklch(0.94 0.045 25); --mb-danger-fg-strong:oklch(0.47 0.17 25);
+    --mb-urgent-bg:oklch(0.955 0.04 45); --mb-urgent-fg:oklch(0.48 0.14 45);
+    --mb-info-bg:oklch(0.955 0.03 250); --mb-info-fg:oklch(0.46 0.11 255);
+    --mb-neutral-bg:oklch(0.955 0.004 220); --mb-neutral-fg:oklch(0.5 0.02 238);
+    --mb-up:oklch(0.5 0.11 160); --mb-down:oklch(0.56 0.16 25);
+    --mb-meter-danger:oklch(0.62 0.17 25); --mb-meter-info:oklch(0.66 0.13 250); --mb-meter-ok:oklch(0.66 0.13 165);
+    --mb-caution:oklch(0.58 0.13 40);
+    --mb-invert-bg:oklch(0.24 0.03 210); --mb-invert-row:oklch(0.3 0.03 208); --mb-invert-row2:oklch(0.28 0.025 210);
+    --mb-invert-note:oklch(0.3 0.035 205); --mb-invert-title:oklch(0.97 0.01 195); --mb-invert-strong:oklch(0.94 0.01 200);
+    --mb-invert-body:oklch(0.82 0.02 202); --mb-invert-cap:oklch(0.8 0.02 205); --mb-invert-accent:oklch(0.82 0.12 178);
+    --mb-sh-1:0 1px 2px oklch(0.45 0.03 200/0.05), 0 6px 18px oklch(0.45 0.04 200/0.06);
+    --mb-sh-2:0 1px 2px oklch(0.45 0.03 200/0.05), 0 14px 40px oklch(0.45 0.04 200/0.08);
+    --mb-sh-3:0 2px 4px oklch(0.45 0.03 200/0.05), 0 16px 40px oklch(0.45 0.04 200/0.11);
+    --mb-sh-4:0 4px 8px oklch(0.45 0.03 200/0.06), 0 24px 56px oklch(0.45 0.04 200/0.16);
+    color-scheme:light;
+  }
+  html[data-mb-theme="dark"]{
+    --mb-env-grad:linear-gradient(150deg, oklch(0.30 0.045 200) 0%, oklch(0.255 0.032 194) 26%, oklch(0.213 0.018 188) 58%, oklch(0.245 0.03 206) 100%);
+    --mb-env-grad-demo:linear-gradient(140deg, oklch(0.31 0.05 200), oklch(0.245 0.028 188));
+    --mb-surface:oklch(0.255 0.014 245); --mb-well:oklch(0.218 0.014 244); --mb-well2:oklch(0.225 0.013 245);
+    --mb-tint:oklch(0.275 0.032 196); --mb-tint-soft:oklch(0.245 0.024 200); --mb-teal-wash:oklch(0.30 0.042 195);
+    --mb-hairline:oklch(0.335 0.012 245); --mb-hairline2:oklch(0.36 0.013 245); --mb-hairline3:oklch(0.40 0.014 245);
+    --mb-track:oklch(0.325 0.012 245); --mb-teal-ring:oklch(0.42 0.05 192); --mb-bar-idle:oklch(0.315 0.028 195);
+    --mb-avatar-bg:oklch(0.42 0.07 190); --mb-avatar-fg:oklch(0.95 0.03 185);
+    --mb-ink950:oklch(0.985 0.006 220); --mb-ink900:oklch(0.965 0.008 220); --mb-ink850:oklch(0.94 0.01 222);
+    --mb-ink800:oklch(0.905 0.01 225); --mb-ink750:oklch(0.875 0.012 226); --mb-ink700:oklch(0.855 0.012 228);
+    --mb-ink680:oklch(0.83 0.012 229); --mb-ink650:oklch(0.81 0.012 230); --mb-ink620:oklch(0.79 0.012 231);
+    --mb-ink600:oklch(0.775 0.012 232); --mb-ink580:oklch(0.755 0.012 233); --mb-ink550:oklch(0.735 0.012 234);
+    --mb-ink520:oklch(0.715 0.012 236); --mb-ink500:oklch(0.69 0.012 237); --mb-ink480:oklch(0.675 0.012 238);
+    --mb-ink450:oklch(0.655 0.012 239); --mb-ink420:oklch(0.635 0.012 240); --mb-ink400:oklch(0.615 0.012 241); --mb-ink380:oklch(0.595 0.012 242);
+    --mb-ink350:oklch(0.545 0.012 243);
+    --mb-teal-700:oklch(0.72 0.13 190); --mb-teal-hover:oklch(0.82 0.11 188); --mb-teal-500:oklch(0.73 0.12 193);
+    --mb-teal-300:oklch(0.85 0.09 188); --mb-teal-icon:oklch(0.76 0.11 189); --mb-on-teal:oklch(0.17 0.02 200);
+    --mb-teal-text:oklch(0.81 0.10 189); --mb-teal-text-strong:oklch(0.89 0.06 190);
+    --mb-success-bg:oklch(0.32 0.06 168); --mb-success-fg:oklch(0.81 0.14 165);
+    --mb-warning-bg:oklch(0.33 0.07 80); --mb-warning-fg:oklch(0.85 0.14 82);
+    --mb-danger-bg:oklch(0.32 0.07 25); --mb-danger-fg:oklch(0.77 0.16 25);
+    --mb-danger-bg-strong:oklch(0.35 0.09 25); --mb-danger-fg-strong:oklch(0.80 0.17 25);
+    --mb-urgent-bg:oklch(0.33 0.08 45); --mb-urgent-fg:oklch(0.84 0.14 50);
+    --mb-info-bg:oklch(0.31 0.06 255); --mb-info-fg:oklch(0.81 0.12 255);
+    --mb-neutral-bg:oklch(0.315 0.012 245); --mb-neutral-fg:oklch(0.735 0.012 240);
+    --mb-up:oklch(0.79 0.15 162); --mb-down:oklch(0.77 0.16 25);
+    --mb-meter-danger:oklch(0.68 0.18 25); --mb-meter-info:oklch(0.70 0.14 252); --mb-meter-ok:oklch(0.73 0.14 165);
+    --mb-caution:oklch(0.83 0.14 55);
+    --mb-invert-bg:oklch(0.155 0.014 245); --mb-invert-row:oklch(0.215 0.02 205); --mb-invert-row2:oklch(0.20 0.016 210);
+    --mb-invert-note:oklch(0.215 0.024 205); --mb-invert-title:oklch(0.97 0.01 195); --mb-invert-strong:oklch(0.94 0.01 200);
+    --mb-invert-body:oklch(0.80 0.02 202); --mb-invert-cap:oklch(0.78 0.02 205); --mb-invert-accent:oklch(0.84 0.12 178);
+    --mb-sh-1:0 1px 2px oklch(0.10 0.012 250/0.50), 0 6px 18px oklch(0.10 0.012 250/0.42);
+    --mb-sh-2:0 1px 2px oklch(0.10 0.012 250/0.50), 0 14px 40px oklch(0.09 0.012 250/0.48);
+    --mb-sh-3:0 2px 4px oklch(0.09 0.012 250/0.52), 0 16px 40px oklch(0.08 0.012 250/0.55);
+    --mb-sh-4:0 4px 8px oklch(0.08 0.012 250/0.55), 0 24px 56px oklch(0.07 0.012 250/0.62);
+    color-scheme:dark;
+  }
+  .ico{font-family:'Material Symbols Outlined';font-weight:300;font-style:normal;line-height:1;white-space:nowrap;-webkit-font-smoothing:antialiased;user-select:none;}
+  a{color:var(--mb-teal-700);text-decoration:none;}
+  a:hover{color:var(--mb-teal-hover);}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--mb-env-grad);padding:56px 48px 120px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--mb-ink900);">
+<div style="max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:32px;">
+
+  <!-- MASTHEAD -->
+  <div style="background:var(--mb-surface);border-radius:28px;padding:56px 56px 48px;box-shadow:var(--mb-sh-3);">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:48px;flex-wrap:wrap;">
+      <div style="max-width:62ch;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px;">
+          <span style="width:30px;height:30px;border-radius:9px;background:var(--mb-teal-700);display:flex;align-items:center;justify-content:center;"><span class="ico" style="font-size:18px;color:var(--mb-on-teal);">auto_awesome</span></span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mb-ink520);">Visual Direction · Moodboard 01</span>
+          <button onClick="{{ toggleTheme }}" title="{{ themeTitle }}" style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;margin-left:6px;border:none;border-radius:999px;background:var(--mb-tint);color:var(--mb-teal-text);font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;" style-hover="background:var(--mb-teal-wash);">
+            <span class="ico" style="font-size:17px;">{{ themeIcon }}</span>{{ themeLabel }}
+          </button>
+        </div>
+        <h1 style="{{ h1Style }}">Clinical Calm</h1>
+        <p style="margin:20px 0 0;font-size:19px;line-height:1.55;color:var(--mb-ink650);text-wrap:pretty;">A synthesis of the six references into one direction: an <strong style="font-weight:600;color:var(--mb-ink850);">aqueous, low-pressure environment</strong> holding <strong style="font-weight:600;color:var(--mb-ink850);">crisp, near-white working surfaces</strong>. Colour carries almost no decoration — it is spent on state, on trend, and on the single action that matters. The result reads as clinical without reading as cold.</p>
+        <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:var(--mb-ink520);max-width:70ch;">This is a creative foundation for evolving the existing system's surface language. Information architecture, component structure, contrast behaviour and accessibility commitments carry over untouched — what changes is temperature, softness, and where emphasis is allowed to land.</p>
+      </div>
+      <div style="flex:0 0 300px;display:flex;flex-direction:column;gap:12px;">
+        <sc-for list="{{ essence }}" as="e" hint-placeholder-count="5">
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--mb-tint-soft);border-radius:12px;">
+            <span class="ico" style="font-size:19px;color:var(--mb-teal-icon);flex:0 0 auto;margin-top:1px;">{{ e.icon }}</span>
+            <div style="min-width:0;">
+              <div style="font-size:14px;font-weight:600;">{{ e.title }}</div>
+              <div style="font-size:13px;line-height:1.45;color:var(--mb-ink550);margin-top:2px;">{{ e.note }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECURRING CHARACTERISTICS -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px;">
+      <h2 style="{{ h2Style }}">What recurs across all six</h2>
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mb-ink420);">observed, not invented</span>
+    </div>
+    <p style="margin:0 0 32px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">Eleven characteristics appear in every reference. They are listed with the mechanism that produces the effect, because the mechanism is what transfers — not the specific colour or corner value.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
+      <sc-for list="{{ recurring }}" as="r" hint-placeholder-count="11">
+        <div style="background:var(--mb-surface);padding:22px 24px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--mb-hairline);">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
+            <span class="ico" style="font-size:18px;color:var(--mb-teal-icon);">{{ r.icon }}</span>
+            <span style="font-size:14px;font-weight:700;letter-spacing:-0.01em;">{{ r.title }}</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.55;color:var(--mb-ink600);">{{ r.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:28px;padding:24px 26px;background:var(--mb-tint);border-radius:14px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Why these hold together</div>
+      <p style="margin:0;font-size:14.5px;line-height:1.65;color:var(--mb-ink680);max-width:104ch;text-wrap:pretty;">Each characteristic removes visual pressure from a different layer, and they compound rather than compete. The cool environment lowers the ambient temperature so a white card reads as <em>lit</em> rather than merely bright. Because the card is already separated by tone, the shadow no longer has to do that work — so it can stay soft, and softness is what keeps a screen of forty cards from vibrating. Because depth is carried by tone and shadow, the border can stay hairline or disappear. Because nothing is outlined loudly, a single saturated teal button or one filled bar in a chart becomes unmissable without being large. And because emphasis is that cheap, the type can stay quiet and regular-weight almost everywhere, which is what makes dense clinical data legible for a full shift. It is a system where restraint at every layer <strong style="font-weight:600;color:var(--mb-ink850);">funds</strong> one moment of contrast per view.</p>
+    </div>
+  </div>
+
+  <!-- COLOUR -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <h2 style="{{ h2Style }}">Colour &amp; colour relationships</h2>
+    <p style="margin:10px 0 32px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">One cool hue family runs the entire product — teal through aqua to mint. Everything else is either ink, near-white, or a state. Note the relationship, not the values: <strong style="font-weight:600;">the brand hue never appears at full strength on a working surface</strong> except as an action or a data mark.</p>
+
+    <div style="display:flex;flex-direction:column;gap:28px;">
+      <sc-for list="{{ paletteGroups }}" as="g" hint-placeholder-count="4">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:3px;">
+            <span style="font-size:15px;font-weight:700;letter-spacing:-0.01em;">{{ g.name }}</span>
+            <span style="font-size:13px;color:var(--mb-ink480);">{{ g.role }}</span>
+          </div>
+          <p style="margin:0 0 14px;font-size:13.5px;line-height:1.55;color:var(--mb-ink580);max-width:92ch;">{{ g.note }}</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;">
+            <sc-for list="{{ g.swatches }}" as="s" hint-placeholder-count="5">
+              <div style="border-radius:12px;overflow:hidden;background:var(--mb-well2);">
+                <div style="display:flex;">
+                  <div style="{{ s.chipStyle }}"></div>
+                  <div style="{{ s.chipDarkStyle }}"></div>
+                </div>
+                <div style="padding:10px 12px 12px;">
+                  <div style="font-size:13px;font-weight:600;line-height:1.3;">{{ s.name }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--mb-ink480);margin-top:4px;word-break:break-all;">{{ s.value }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--mb-ink420);margin-top:2px;word-break:break-all;">{{ s.dark }}</div>
+                  <div style="font-size:12px;line-height:1.4;color:var(--mb-ink550);margin-top:6px;">{{ s.use }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="padding:24px 26px;background:var(--mb-tint-soft);border-radius:14px;">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;">The three relationships that define it</div>
+        <ul style="margin:0;padding-left:20px;font-size:13.5px;line-height:1.7;color:var(--mb-ink620);">
+          <li><strong style="font-weight:600;">Environment is cool, surface is neutral.</strong> The gradient is saturated; the card is not. That gap is the whole depth model.</li>
+          <li><strong style="font-weight:600;">Tint before fill.</strong> A state is a 4–6% wash of its hue with the hue's dark tone as text — never a solid block.</li>
+          <li><strong style="font-weight:600;">One full-strength moment per view.</strong> Primary button, or highlighted data mark. Two competing saturations is the failure mode.</li>
+        </ul>
+      </div>
+      <div style="padding:24px 26px;background:var(--mb-well2);border-radius:14px;">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Carried over unchanged</div>
+        <p style="margin:0 0 10px;font-size:13.5px;line-height:1.6;color:var(--mb-ink620);">Every pairing here is a hue-and-temperature proposal only. The existing system's measured contrast behaviour is the constraint that outranks it: label text at 4.5:1 on any surface it can land on including hover, control boundaries at 3:1, status foregrounds tested against both their own tint and the plain surface.</p>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--mb-ink620);">The references are light-theme only. A cool-neutral dark counterpart already exists and should keep its separately-authored shadows and inverted accent foreground — nothing in this direction changes that.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <h2 style="{{ h2Style }}">Typography</h2>
+    <p style="margin:10px 0 32px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">The references run two voices. A geometric, tightly-tracked grotesk for display and numbers — round bowls, near-circular <em>o</em>, heavy at the top of the scale. And a neutral humanist grotesk for everything operational. This is worth adopting deliberately rather than by accident.</p>
+
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-bottom:28px;">
+      <div style="padding:30px 32px;background:var(--mb-tint);border-radius:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mb-teal-text);margin-bottom:16px;">Display voice — new</div>
+        <div style="{{ displaySampleStyle }}">Hospital Command</div>
+        <div style="{{ displayNumStyle }}">$847K · 78% · 1,248</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mb-teal-text);margin-top:18px;">{{ displayFontName }} · 700 / 800 · tracking −0.03em</div>
+        <p style="margin:12px 0 0;font-size:13.5px;line-height:1.6;color:var(--mb-teal-text);">Reserved for page titles, KPI figures and marketing surfaces. Its geometry makes large numerals feel engineered rather than shouty — which is why the references can set a metric at 40px without the screen tipping into a billboard.</p>
+      </div>
+      <div style="padding:30px 32px;background:var(--mb-well2);border-radius:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mb-ink520);margin-bottom:16px;">UI voice — unchanged</div>
+        <div style="font-size:32px;font-weight:600;letter-spacing:-0.015em;line-height:1.15;">Medical Record Review</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;letter-spacing:-0.01em;margin-top:12px;color:var(--mb-ink800);">MR-2026-004821</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mb-ink500);margin-top:18px;">IBM Plex Sans + Plex Mono · 400–700</div>
+        <p style="margin:12px 0 0;font-size:13.5px;line-height:1.6;color:var(--mb-ink600);">Every label, control, table cell and identifier stays exactly as it is. Two families is the ceiling — the display voice is a third only if the mono is retired, and it should not be.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
+      <sc-for list="{{ typeNotes }}" as="t" hint-placeholder-count="4">
+        <div style="padding:20px 22px;background:var(--mb-well2);border-radius:14px;">
+          <div style="font-size:13.5px;font-weight:700;margin-bottom:8px;">{{ t.title }}</div>
+          <p style="margin:0;font-size:13px;line-height:1.55;color:var(--mb-ink600);">{{ t.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- SURFACE, RADIUS, ELEVATION -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <h2 style="{{ h2Style }}">Surface, radius &amp; elevation</h2>
+    <p style="margin:10px 0 32px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">Three nested planes, each one step softer and one step lighter than the one holding it. Radius decreases with depth; shadow decreases faster.</p>
+
+    <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-bottom:28px;align-items:start;">
+      <div style="padding:36px;border-radius:20px;background:var(--mb-env-grad-demo);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-teal-text);margin-bottom:14px;">1 · Environment</div>
+        <div style="background:var(--mb-surface);border-radius:18px;padding:26px;box-shadow:var(--mb-sh-3);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-ink500);margin-bottom:14px;">2 · Working surface</div>
+          <div style="background:var(--mb-well);border-radius:12px;padding:20px;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-ink500);margin-bottom:10px;">3 · Inset well</div>
+            <p style="margin:0;font-size:13px;line-height:1.55;color:var(--mb-ink600);">Detail rows, nested record blocks and chart bodies sit here. No shadow at this depth — a tint step is enough, and shadow inside a card is what makes an interface look upholstered.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="padding:24px 26px;background:var(--mb-well2);border-radius:14px;">
+          <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Radius philosophy</div>
+          <p style="margin:0 0 12px;font-size:13.5px;line-height:1.6;color:var(--mb-ink600);">Softer than the current system across the board, and proportional to the element: the app shell is the roundest thing on screen, the smallest control the sharpest. Chips and avatars go fully round, which reads as friendly precisely because nothing else does.</p>
+          <div style="display:flex;align-items:flex-end;gap:10px;">
+            <sc-for list="{{ radiusSteps }}" as="r" hint-placeholder-count="5">
+              <div style="flex:1;min-width:0;text-align:center;">
+                <div style="{{ r.demoStyle }}"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mb-ink550);margin-top:7px;">{{ r.value }}</div>
+                <div style="font-size:11px;line-height:1.35;color:var(--mb-ink480);margin-top:2px;">{{ r.use }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="padding:24px 26px;background:var(--mb-well2);border-radius:14px;">
+          <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Elevation philosophy</div>
+          <p style="margin:0;font-size:13.5px;line-height:1.6;color:var(--mb-ink600);">Wide, faint, and tinted toward the environment hue rather than neutral grey — a cool shadow on a cool canvas reads as light falling, a grey one reads as dirt. Blur is large relative to offset (roughly 3:1), so the edge is never traceable. Elevation is a <em>hint</em>; separation is done by tone.</p>
+          <div style="display:flex;gap:10px;margin-top:16px;">
+            <sc-for list="{{ elevationSteps }}" as="e" hint-placeholder-count="3">
+              <div style="{{ e.demoStyle }}">
+                <div style="font-size:12px;font-weight:600;">{{ e.name }}</div>
+                <div style="font-size:11px;line-height:1.35;color:var(--mb-ink500);margin-top:3px;">{{ e.use }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENT STYLING -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <h2 style="{{ h2Style }}">Component styling</h2>
+    <p style="margin:10px 0 32px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">Specimens, not components — these show the treatment the existing component set would inherit. Structure, semantics and behaviour are unchanged; only surface, radius, weight and colour placement move.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;">
+
+      <!-- KPI -->
+      <div style="background:var(--mb-well);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-ink520);margin-bottom:16px;">Metric tile</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="2">
+            <div style="background:var(--mb-surface);border-radius:14px;padding:18px;box-shadow:var(--mb-sh-1);">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                <span class="ico" style="font-size:18px;color:var(--mb-ink520);">{{ k.icon }}</span>
+                <span style="font-size:13px;font-weight:500;color:var(--mb-ink650);">{{ k.label }}</span>
+              </div>
+              <div style="{{ k.valueStyle }}">{{ k.value }}</div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:10px;">
+                <span class="ico" style="{{ k.deltaIconStyle }}">{{ k.deltaIcon }}</span>
+                <span style="{{ k.deltaStyle }}">{{ k.delta }}</span>
+                <span style="font-size:12px;color:var(--mb-ink450);">vs last week</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:14px 0 0;font-size:12.5px;line-height:1.5;color:var(--mb-ink550);">Label in regular weight and a muted icon; the figure carries all the emphasis. The delta is the only coloured element and it is small — direction matters more than magnitude at a glance.</p>
+      </div>
+
+      <!-- STATUS -->
+      <div style="background:var(--mb-well);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-ink520);margin-bottom:16px;">State pills</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+          <sc-for list="{{ pills }}" as="p" hint-placeholder-count="6">
+            <span style="{{ p.style }}">{{ p.label }}</span>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <sc-for list="{{ priorityPills }}" as="p" hint-placeholder-count="4">
+            <span style="{{ p.style }}">{{ p.label }}</span>
+          </sc-for>
+        </div>
+        <p style="margin:16px 0 0;font-size:12.5px;line-height:1.5;color:var(--mb-ink550);">Fully-round, tint-filled, no border, no dot. Weight 600 at 12px keeps them legible at the small size the density demands. The dot returns only where a pill must sit inline in running text.</p>
+      </div>
+
+      <!-- RECORD ROWS -->
+      <div style="background:var(--mb-well);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-ink520);margin-bottom:16px;">Record detail block</div>
+        <div style="background:var(--mb-surface);border-radius:14px;padding:18px 20px;box-shadow:var(--mb-sh-1);">
+          <div style="display:flex;align-items:center;gap:11px;padding-bottom:14px;">
+            <span style="width:38px;height:38px;border-radius:50%;background:var(--mb-avatar-bg);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--mb-avatar-fg);flex:0 0 auto;">SW</span>
+            <div style="min-width:0;flex:1;">
+              <div style="font-size:14.5px;font-weight:600;letter-spacing:-0.01em;">Dr. Sarah Williams</div>
+              <div style="font-size:12.5px;color:var(--mb-ink500);margin-top:1px;">MD, FAAOS (Orthopedics)</div>
+            </div>
+            <span style="font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--mb-success-bg);color:var(--mb-success-fg);">On Duty</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <sc-for list="{{ detailRows }}" as="d" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:20px 118px 10px 1fr;gap:8px;align-items:center;padding:8px 0;">
+                <span class="ico" style="font-size:16px;color:var(--mb-ink420);">{{ d.icon }}</span>
+                <span style="font-size:13px;color:var(--mb-ink520);">{{ d.label }}</span>
+                <span style="font-size:13px;color:var(--mb-ink350);">:</span>
+                <span style="{{ d.valueStyle }}">{{ d.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <p style="margin:14px 0 0;font-size:12.5px;line-height:1.5;color:var(--mb-ink550);">The colon-aligned <em>icon · label · value</em> row is the single most repeated pattern in the references. It scans faster than a two-line stacked field and survives being nested two cards deep.</p>
+      </div>
+
+      <!-- NAV -->
+      <div style="background:var(--mb-well);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-ink520);margin-bottom:16px;">Navigation &amp; controls</div>
+        <div style="display:flex;gap:16px;">
+          <div style="flex:0 0 168px;background:var(--mb-surface);border-radius:14px;padding:12px 10px;box-shadow:var(--mb-sh-1);">
+            <div style="font-size:10.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mb-ink380);padding:6px 10px 8px;">Clinical</div>
+            <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+              <div style="{{ n.style }}">
+                <span class="ico" style="{{ n.iconStyle }}">{{ n.icon }}</span>
+                <span>{{ n.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 14px;background:var(--mb-surface);border-radius:12px;box-shadow:inset 0 0 0 1px var(--mb-hairline2);">
+              <span class="ico" style="font-size:17px;color:var(--mb-ink420);">search</span>
+              <span style="font-size:13.5px;color:var(--mb-ink400);">Search patients, records…</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span style="display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 18px;border-radius:11px;background:var(--mb-teal-700);color:var(--mb-on-teal);font-size:13.5px;font-weight:600;">
+                <span class="ico" style="font-size:17px;">add</span>Schedule
+              </span>
+              <span style="display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 16px;border-radius:11px;background:var(--mb-surface);box-shadow:inset 0 0 0 1px var(--mb-hairline3);font-size:13.5px;font-weight:500;color:var(--mb-ink700);">
+                <span class="ico" style="font-size:17px;color:var(--mb-ink500);">tune</span>Filter
+              </span>
+              <span style="width:38px;height:38px;border-radius:50%;background:var(--mb-well);display:inline-flex;align-items:center;justify-content:center;">
+                <span class="ico" style="font-size:18px;color:var(--mb-ink580);">notifications</span>
+              </span>
+            </div>
+            <div style="display:flex;gap:4px;padding:4px;background:var(--mb-surface);border-radius:12px;box-shadow:inset 0 0 0 1px var(--mb-hairline2);">
+              <span style="flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:8px 6px;border-radius:9px;background:var(--mb-tint);color:var(--mb-teal-text);">Records</span>
+              <span style="flex:1;text-align:center;font-size:12.5px;font-weight:500;padding:8px 6px;border-radius:9px;color:var(--mb-ink500);">Audits</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin:14px 0 0;font-size:12.5px;line-height:1.5;color:var(--mb-ink550);">Active nav is a soft tinted block with no left rail and no bold weight — the tint alone carries it. Inputs use a hairline inset ring rather than a border, so a form does not become a grid of boxes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ICONOGRAPHY + DATA VIZ -->
+  <div style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:32px;">
+    <div style="background:var(--mb-surface);border-radius:24px;padding:44px 40px;box-shadow:var(--mb-sh-2);">
+      <h2 style="{{ h2Style }}">Iconography</h2>
+      <p style="margin:10px 0 24px;font-size:15px;line-height:1.6;color:var(--mb-ink580);">Monoline outline, light optical weight, rounded terminals, no fill, no duotone. Icons are consistently one shade lighter than the text they accompany — present, never leading.</p>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding:20px 16px;background:var(--mb-well);border-radius:14px;margin-bottom:20px;">
+        <sc-for list="{{ iconSet }}" as="i" hint-placeholder-count="18">
+          <div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;">
+            <span class="ico" style="font-size:21px;color:var(--mb-ink600);">{{ i }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <sc-for list="{{ iconRules }}" as="r" hint-placeholder-count="4">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="ico" style="font-size:17px;color:var(--mb-teal-icon);margin-top:1px;flex:0 0 auto;">check_small</span>
+            <span style="font-size:13px;line-height:1.5;color:var(--mb-ink620);">{{ r }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:24px;padding:20px 22px;background:var(--mb-well);border-radius:14px;">
+        <div style="font-size:13.5px;font-weight:700;margin-bottom:8px;">Illustration &amp; imagery</div>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:var(--mb-ink600);">The references contain no illustration at all — only photography of clinicians at work, always cool-toned, always cropped into a rounded surface, and only on marketing pages. Inside the product, imagery is limited to circular staff and patient avatars. Adopt this literally: <strong style="font-weight:600;">no spot illustration, no mascot, no abstract 3D</strong>. Empty states use a single muted outline icon.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--mb-surface);border-radius:24px;padding:44px 40px;box-shadow:var(--mb-sh-2);">
+      <h2 style="{{ h2Style }}">Data visualisation</h2>
+      <p style="margin:10px 0 24px;font-size:15px;line-height:1.6;color:var(--mb-ink580);">The most distinctive layer in the collection, and the most transferable. Thin stroke, gradient fill decaying to nothing, no chart border, no vertical gridlines, and a floating tooltip card that looks like it came from the same family as the KPI tile.</p>
+
+      <div style="background:var(--mb-surface);border-radius:16px;padding:22px 24px 16px;box-shadow:var(--mb-sh-2);margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <span style="{{ chartTitleStyle }}">Revenue Trend</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--mb-ink650);padding:6px 12px;border-radius:10px;box-shadow:inset 0 0 0 1px var(--mb-hairline2);">Month<span class="ico" style="font-size:15px;color:var(--mb-ink450);">expand_more</span></span>
+        </div>
+        <div style="position:relative;">
+          <div style="display:flex;gap:10px;">
+            <div style="display:flex;flex-direction:column;justify-content:space-between;font-size:10.5px;color:var(--mb-ink420);font-family:'IBM Plex Mono',monospace;padding-bottom:18px;flex:0 0 auto;">
+              <div>100k</div>
+              <div>80k</div>
+              <div>60k</div>
+              <div>40k</div>
+              <div>20k</div>
+            </div>
+            <div style="flex:1;min-width:0;">
+              <svg viewBox="0 0 100 70" preserveAspectRatio="none" style="width:100%;height:150px;display:block;overflow:visible;">
+                <defs>
+                  <linearGradient id="md-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--mb-teal-500)" stop-opacity="0.20"></stop>
+                    <stop offset="100%" stop-color="var(--mb-teal-500)" stop-opacity="0"></stop>
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="14" x2="100" y2="14" stroke="var(--mb-track)" stroke-width="0.4" vector-effect="non-scaling-stroke"></line>
+                <line x1="0" y1="28" x2="100" y2="28" stroke="var(--mb-track)" stroke-width="0.4" vector-effect="non-scaling-stroke"></line>
+                <line x1="0" y1="42" x2="100" y2="42" stroke="var(--mb-track)" stroke-width="0.4" vector-effect="non-scaling-stroke"></line>
+                <line x1="0" y1="56" x2="100" y2="56" stroke="var(--mb-track)" stroke-width="0.4" vector-effect="non-scaling-stroke"></line>
+                <line x1="0" y1="70" x2="100" y2="70" stroke="var(--mb-track)" stroke-width="0.4" vector-effect="non-scaling-stroke"></line>
+                <path d="{{ areaPath }}" fill="url(#md-area)"></path>
+                <path d="{{ linePath }}" fill="none" stroke="var(--mb-teal-500)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"></path>
+                <line x1="72" y1="20" x2="72" y2="70" stroke="var(--mb-ink350)" stroke-width="1" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"></line>
+                <circle cx="72" cy="20" r="4" fill="var(--mb-teal-500)" stroke="var(--mb-surface)" stroke-width="2.5" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mb-ink450);margin-top:8px;">
+                <div>Jan</div>
+                <div>Feb</div>
+                <div>Mar</div>
+                <div>Apr</div>
+                <div>May</div>
+                <div>Jun</div>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute;left:58%;top:-4px;background:var(--mb-surface);border-radius:11px;padding:10px 14px;box-shadow:var(--mb-sh-4);pointer-events:none;">
+            <div style="font-size:11.5px;color:var(--mb-ink480);margin-bottom:2px;">April 2025</div>
+            <div style="display:flex;align-items:baseline;gap:5px;">
+              <span style="{{ tooltipValueStyle }}">65k</span>
+              <span style="font-size:11.5px;color:var(--mb-ink500);">Revenue</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:var(--mb-well);border-radius:14px;padding:20px;">
+          <div style="font-size:12.5px;font-weight:600;color:var(--mb-ink680);margin-bottom:16px;">Comparison bars</div>
+          <div>
+            <div style="display:flex;align-items:flex-end;gap:10px;height:118px;">
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="4">
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;">
+                  <div style="{{ b.barStyle }}"></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:8px;">
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="4">
+                <div style="{{ b.labelStyle }}">{{ b.name }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--mb-well);border-radius:14px;padding:20px;">
+          <div style="font-size:12.5px;font-weight:600;color:var(--mb-ink680);margin-bottom:14px;">Capacity meters</div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ meters }}" as="m" hint-placeholder-count="3">
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;">
+                  <span style="font-size:12.5px;font-weight:500;color:var(--mb-ink700);">{{ m.name }}</span>
+                  <span style="font-size:12.5px;font-weight:600;">{{ m.pct }}</span>
+                </div>
+                <div style="height:7px;border-radius:999px;background:var(--mb-track);overflow:hidden;">
+                  <div style="{{ m.fillStyle }}"></div>
+                </div>
+                <div style="font-size:11.5px;color:var(--mb-ink480);margin-top:5px;">{{ m.detail }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;padding:20px 22px;background:var(--mb-tint);border-radius:14px;">
+        <div style="font-size:13.5px;font-weight:700;margin-bottom:8px;">Chart rules to inherit</div>
+        <ul style="margin:0;padding-left:20px;font-size:13px;line-height:1.65;color:var(--mb-ink680);">
+          <li>2px stroke, no point markers except the hovered one; that one gets a white ring.</li>
+          <li>Area fill is the stroke hue at ~18% decaying to 0 — it indicates volume without claiming a value.</li>
+          <li>Horizontal gridlines only, hairline, or omitted entirely when the axis labels suffice.</li>
+          <li>Bars are tinted and fully rounded at the top; the highlighted bar is the only solid one.</li>
+          <li>Tooltips float above with the card's own radius and shadow — never a dark inverted box.</li>
+          <li>Meters take a semantic hue from their threshold, so a ward at 90% reads red without a label.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DENSITY -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <h2 style="{{ h2Style }}">Whitespace &amp; layout density</h2>
+    <p style="margin:10px 0 32px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">The references are generous <em>between</em> containers and disciplined <em>inside</em> them. That combination is what lets a screen hold four KPIs, a chart, a queue and an alert panel without feeling packed — the eye rests in the gutters, not in the cards.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;">
+      <sc-for list="{{ densityNotes }}" as="d" hint-placeholder-count="6">
+        <div style="padding:22px 24px;background:var(--mb-well);border-radius:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;color:var(--mb-teal-text);margin-bottom:8px;">{{ d.value }}</div>
+          <div style="font-size:13.5px;font-weight:600;margin-bottom:6px;">{{ d.title }}</div>
+          <p style="margin:0;font-size:13px;line-height:1.55;color:var(--mb-ink600);">{{ d.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CONFLICTS -->
+  <div style="background:var(--mb-surface);border-radius:24px;padding:44px 48px;box-shadow:var(--mb-sh-2);">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px;">
+      <h2 style="{{ h2Style }}">Conflicts in the references</h2>
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mb-caution);">resolve before adopting</span>
+    </div>
+    <p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:var(--mb-ink580);max-width:88ch;">Six references, one product family — but they are not internally consistent. Five conflicts matter enough to decide now, because each one would otherwise get decided accidentally, differently, on every screen.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <sc-for list="{{ conflicts }}" as="c" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr 1.15fr;gap:20px;padding:22px 24px;background:var(--mb-well2);border-radius:14px;align-items:start;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--mb-ink420);padding-top:2px;">{{ c.n }}</div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--mb-ink450);margin-bottom:6px;">Tension</div>
+            <div style="font-size:14px;font-weight:600;line-height:1.4;margin-bottom:5px;">{{ c.title }}</div>
+            <p style="margin:0;font-size:13px;line-height:1.5;color:var(--mb-ink580);">{{ c.tension }}</p>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--mb-ink450);margin-bottom:6px;">Cost of guessing</div>
+            <p style="margin:0;font-size:13px;line-height:1.5;color:var(--mb-ink580);">{{ c.cost }}</p>
+          </div>
+          <div style="padding:14px 16px;background:var(--mb-tint);border-radius:11px;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--mb-teal-text);margin-bottom:6px;">Prioritise</div>
+            <p style="margin:0;font-size:13px;line-height:1.55;color:var(--mb-teal-text-strong);font-weight:500;">{{ c.rec }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- WHAT CHANGES / WHAT DOESN'T -->
+  <div style="background:var(--mb-invert-bg);border-radius:24px;padding:48px;box-shadow:var(--mb-sh-4);">
+    <h2 style="{{ h2DarkStyle }}">Applying this to the existing system</h2>
+    <p style="margin:12px 0 36px;font-size:15.5px;line-height:1.6;color:var(--mb-invert-body);max-width:92ch;">A moodboard that cannot be adopted incrementally is decoration. This one is deliberately scoped to the surface layer, so it lands as a re-skin of the existing token values rather than a rebuild of anything above them.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:18px;">
+          <span class="ico" style="font-size:20px;color:var(--mb-invert-accent);">swap_horiz</span>
+          <span style="font-size:13px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-invert-accent);">Changes — surface layer only</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <sc-for list="{{ changes }}" as="c" hint-placeholder-count="7">
+            <div style="display:flex;gap:11px;align-items:flex-start;padding:14px 16px;background:var(--mb-invert-row);border-radius:11px;">
+              <span class="ico" style="font-size:17px;color:var(--mb-invert-accent);flex:0 0 auto;margin-top:1px;">arrow_forward</span>
+              <div>
+                <div style="font-size:13.5px;font-weight:600;color:var(--mb-invert-strong);">{{ c.title }}</div>
+                <div style="font-size:13px;line-height:1.5;color:var(--mb-invert-body);margin-top:3px;">{{ c.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:18px;">
+          <span class="ico" style="font-size:20px;color:var(--mb-invert-cap);">lock</span>
+          <span style="font-size:13px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--mb-invert-cap);">Preserved — not up for negotiation</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <sc-for list="{{ preserved }}" as="p" hint-placeholder-count="7">
+            <div style="display:flex;gap:11px;align-items:flex-start;padding:14px 16px;background:var(--mb-invert-row2);border-radius:11px;">
+              <span class="ico" style="font-size:17px;color:var(--mb-invert-cap);flex:0 0 auto;margin-top:1px;">check_small</span>
+              <div>
+                <div style="font-size:13.5px;font-weight:600;color:var(--mb-invert-strong);">{{ p.title }}</div>
+                <div style="font-size:13px;line-height:1.5;color:var(--mb-invert-body);margin-top:3px;">{{ p.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:32px;padding:24px 26px;background:var(--mb-invert-note);border-radius:14px;">
+      <div style="font-size:13.5px;font-weight:700;color:var(--mb-invert-accent);margin-bottom:8px;">One caution</div>
+      <p style="margin:0;font-size:14px;line-height:1.65;color:var(--mb-invert-body);max-width:100ch;">This direction lowers contrast almost everywhere: fainter borders, softer shadows, tinted rather than filled states, lighter icon strokes. Every one of those moves is toward the accessibility floor, not away from it. Adopt it token by token with the contrast checks re-run after each move — particularly the 11px label tier on tinted and hovered surfaces, and control boundaries where the hairline ring is the only thing defining a hit area. Where a reference falls below the floor, the floor wins.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;displayFont&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Plus Jakarta Sans&quot;,&quot;Outfit&quot;,&quot;Manrope&quot;],&quot;default&quot;:&quot;Plus Jakarta Sans&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Direction&quot;},&quot;primaryTeal&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;oklch(0.45 0.09 187)&quot;,&quot;oklch(0.38 0.08 190)&quot;,&quot;oklch(0.52 0.10 195)&quot;,&quot;oklch(0.42 0.07 210)&quot;],&quot;default&quot;:&quot;oklch(0.45 0.09 187)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Direction&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let theme='light';
+    try{ const t=localStorage.getItem('mb.theme'); if(t==='dark'||t==='light') theme=t; }catch(e){}
+    this.state={theme};
+  }
+  applyTheme(){
+    const el=document.documentElement;
+    if(!el) return;
+    if(this.state.theme==='dark') el.setAttribute('data-mb-theme','dark');
+    else el.removeAttribute('data-mb-theme');
+    try{ localStorage.setItem('mb.theme',this.state.theme); }catch(e){}
+  }
+  componentDidMount(){ this.applyTheme(); }
+  componentDidUpdate(){ this.applyTheme(); }
+  toggleTheme(){ this.setState(s=>({theme:s.theme==='dark'?'light':'dark'})); }
+  renderVals(){
+    const p = this.props || {};
+    const displayFont = p.displayFont ?? 'Plus Jakarta Sans';
+    const teal = p.primaryTeal ?? 'oklch(0.45 0.09 187)';
+    const disp = "'" + displayFont + "', system-ui, sans-serif";
+
+    const h2Style = {margin:0, fontFamily:disp, fontSize:'27px', fontWeight:700, letterSpacing:'-0.025em', color:'var(--mb-ink900)'};
+
+    const chip=(v,ring)=>({flex:1,height:'70px',background:v,boxShadow: ring?'inset 0 0 0 1px oklch(0.86 0.008 220)':'none'});
+    const swatch=(name,value,dark,use,ring)=>({name,use,
+      value:'L  '+value, dark:'D  '+dark,
+      chipStyle:chip(value,ring), chipDarkStyle:chip(dark,ring)});
+
+    const pill=(label,bg,fg)=>({label,style:{display:'inline-flex',alignItems:'center',fontSize:'12px',fontWeight:600,padding:'5px 11px',borderRadius:'999px',background:bg,color:fg}});
+
+    const pts=[[0,58],[8,52],[16,60],[24,44],[32,50],[40,34],[48,41],[56,26],[64,33],[72,20],[80,28],[88,14],[96,22],[100,12]];
+    const linePath=pts.map((pt,i)=>(i?'L':'M')+pt[0]+' '+pt[1]).join(' ');
+    const areaPath=linePath+' L100 70 L0 70 Z';
+
+    const bars=[['Cash',52,false],['Card',68,false],['Insurance',100,true],['UPI',74,false]].map(b=>({
+      name:b[0],
+      barStyle:{height:b[1]+'%',borderRadius:'8px 8px 3px 3px',
+        background: b[2] ? 'linear-gradient(180deg, var(--mb-teal-500), var(--mb-teal-300))' : 'var(--mb-bar-idle)'},
+      labelStyle:{flex:1,textAlign:'center',fontSize:'11px',color: b[2]?'var(--mb-teal-text)':'var(--mb-ink450)',fontWeight: b[2]?600:400},
+    }));
+
+    return {
+      h1Style:{margin:0,fontFamily:disp,fontSize:'62px',lineHeight:1.02,fontWeight:800,letterSpacing:'-0.04em',color:'var(--mb-ink950)'},
+      h2Style, h2DarkStyle:{...h2Style,color:'var(--mb-invert-title)'},
+      chartTitleStyle:{fontFamily:disp,fontSize:'17px',fontWeight:700,letterSpacing:'-0.02em'},
+      displayFontName:displayFont,
+      displaySampleStyle:{fontFamily:disp,fontSize:'40px',fontWeight:800,letterSpacing:'-0.035em',lineHeight:1.05,color:'var(--mb-ink900)'},
+      displayNumStyle:{fontFamily:disp,fontSize:'27px',fontWeight:700,letterSpacing:'-0.03em',marginTop:'10px',color:'var(--mb-teal-text)'},
+      linePath, areaPath, bars,
+      themeIcon:this.state.theme==='dark'?'light_mode':'dark_mode',
+      themeLabel:this.state.theme==='dark'?'Light':'Dark',
+      themeTitle:this.state.theme==='dark'?'Switch to light theme':'Switch to dark theme',
+      toggleTheme:()=>this.toggleTheme(),
+      tooltipValueStyle:{fontFamily:disp,fontSize:'17px',fontWeight:700,letterSpacing:'-0.02em'},
+
+      essence:[
+        {icon:'water_drop',title:'Aqueous',note:'Cool gradient ambience, never flat grey'},
+        {icon:'wb_sunny',title:'Lit, not shaded',note:'Depth from light on white, not from lines'},
+        {icon:'straighten',title:'Quietly precise',note:'Dense data, regular weight, no shouting'},
+        {icon:'spa',title:'Low pressure',note:'Softness as a clinical courtesy'},
+        {icon:'bolt',title:'One accent moment',note:'Emphasis is rationed, so it lands'},
+      ],
+
+      recurring:[
+        {icon:'gradient',title:'Aqueous environment',body:'Every screen floats on a teal-to-mint gradient. The app is a rounded panel inset from the edge — a window onto the work, not the whole world.'},
+        {icon:'layers',title:'Near-white working surface',body:'Inside the panel, surfaces go almost fully neutral. Cool ambience outside, calm neutrality where the data is.'},
+        {icon:'blur_on',title:'Barely-there elevation',body:'Wide, faint, hue-tinted shadows. Nothing casts a hard edge; cards read as lifted rather than stacked.'},
+        {icon:'rounded_corner',title:'Soft, graduated radius',body:'Generous and consistently scaled by element size — panel roundest, control sharpest, chips and avatars fully round.'},
+        {icon:'label',title:'Tinted state pills',body:'Status is always a soft wash of a semantic hue with that hue as text. No borders, no solid fills, no dots.'},
+        {icon:'view_agenda',title:'Card-within-card nesting',body:'Two and three levels deep, distinguished by tone step alone. The inner level never gets its own shadow.'},
+        {icon:'format_list_bulleted',title:'Colon-aligned detail rows',body:'Icon, muted label, colon, value. The dominant way every record shows its fields across all six references.'},
+        {icon:'trending_up',title:'Gradient-decay charts',body:'Thin stroke over a fill that fades to nothing. No chart frame, no vertical gridlines, floating light tooltips.'},
+        {icon:'numbers',title:'Numbers as the headline',body:'The metric is the largest, heaviest thing in its container; its label sits small and regular-weight above it.'},
+        {icon:'line_weight',title:'Monoline light icons',body:'Uniform thin outline, rounded ends, one shade lighter than adjacent text. Consistently supporting, never leading.'},
+        {icon:'open_in_full',title:'Loose outside, tight inside',body:'Wide gutters between containers; efficient padding and row rhythm within them. Rest lives in the gaps.'},
+      ],
+
+      paletteGroups:[
+        {name:'Environment', role:'behind the product', note:'A saturated cool gradient that never touches content. Its only job is to make the working surface read as illuminated — which is what lets the shadow stay faint and the border stay hairline. In dark it inverts to a deep teal-black, keeping the same hue relationship at a fraction of the lightness.', swatches:[
+          swatch('Aqua 200','oklch(0.90 0.055 196)','oklch(0.30 0.045 200)','Gradient origin'),
+          swatch('Aqua 100','oklch(0.95 0.035 186)','oklch(0.255 0.032 194)','Gradient mid'),
+          swatch('Mint 50','oklch(0.975 0.018 176)','oklch(0.213 0.018 188)','Gradient resolve'),
+          swatch('Panel edge','oklch(0.955 0.03 200)','oklch(0.245 0.03 206)','Where shell meets air'),
+        ]},
+        {name:'Surface', role:'where work happens', note:'Four steps inside a narrow lightness band. Almost neutral, with a trace of the environment hue so the two planes belong to the same light. Dark keeps the identical relationships — the band simply moves to the bottom of the scale and the order stays intact.', swatches:[
+          swatch('Surface 0','oklch(0.995 0.002 220)','oklch(0.255 0.014 245)','Cards, panels, menus',true),
+          swatch('Canvas','oklch(0.98 0.006 210)','oklch(0.232 0.014 244)','Behind cards, inside shell',true),
+          swatch('Well','oklch(0.972 0.008 200)','oklch(0.218 0.014 244)','Inset blocks, chart bodies',true),
+          swatch('Tint well','oklch(0.965 0.02 188)','oklch(0.275 0.032 196)','Emphasised inset, active nav'),
+          swatch('Hairline','oklch(0.90 0.008 220)','oklch(0.36 0.013 245)','Inset ring, divider'),
+        ]},
+        {name:'Brand', role:'action and data', note:'Deep teal for the one primary action; a lighter aqua for data marks so a chart never competes with a button. In dark the accent lightens past the point where white text works, so its foreground inverts to near-black — the same rule the existing system already applies to its blue.', swatches:[
+          swatch('Teal 700','oklch(0.45 0.09 187)','oklch(0.72 0.13 190)','Primary button, filled bar'),
+          swatch('Teal 500','oklch(0.58 0.11 195)','oklch(0.73 0.12 193)','Chart stroke, active icon'),
+          swatch('Teal 300','oklch(0.72 0.09 190)','oklch(0.85 0.09 188)','Gradient bar top, avatar tint'),
+          swatch('Teal wash','oklch(0.955 0.028 188)','oklch(0.30 0.042 195)','Active nav, selected tab'),
+          swatch('On accent','oklch(0.98 0.015 180)','oklch(0.17 0.02 200)','Text on an accent fill'),
+        ]},
+        {name:'Ink', role:'text hierarchy', note:'Cool-shifted near-black through to a muted slate, mirrored in dark as a near-white through to a dim slate. The hue shift is small but it is what keeps text from looking pasted onto a teal-lit surface in either theme.', swatches:[
+          swatch('Ink 900','oklch(0.22 0.02 248)','oklch(0.965 0.008 220)','Titles, metrics'),
+          swatch('Ink 700','oklch(0.36 0.02 240)','oklch(0.855 0.012 228)','Body, values'),
+          swatch('Ink 500','oklch(0.52 0.02 238)','oklch(0.715 0.012 236)','Labels, captions'),
+          swatch('Ink 400','oklch(0.62 0.02 235)','oklch(0.635 0.012 240)','Icons, axis, placeholder'),
+        ]},
+        {name:'State', role:'meaning only', note:'Five semantic pairs, each a soft tint with its own darker foreground — and in dark, a deep tint with a light foreground. Both directions are authored, never derived by inversion. The references also use violet and pink decoratively; see conflict 3.', swatches:[
+          swatch('Success','oklch(0.955 0.035 175)','oklch(0.32 0.06 168)','Ready, collected, available'),
+          swatch('Warning','oklch(0.96 0.045 85)','oklch(0.33 0.07 80)','Pending, low stock, due soon'),
+          swatch('Danger','oklch(0.955 0.03 25)','oklch(0.32 0.07 25)','Critical, overdue, stat'),
+          swatch('Info','oklch(0.955 0.03 250)','oklch(0.31 0.06 255)','In progress, scheduled'),
+          swatch('Neutral','oklch(0.955 0.004 220)','oklch(0.315 0.012 245)','Not started, no state',true),
+        ]},
+      ],
+
+
+
+      typeNotes:[
+        {title:'Hierarchy by size, then weight',body:'Two clear jumps — page title, then section title — and everything below is one size with weight doing the work. The references never stack size, weight and colour on the same step.'},
+        {title:'Numerals are display, not body',body:'Any figure a user compares or acts on takes the display voice. Identifiers stay mono. Nothing in a table cell becomes display type.'},
+        {title:'Tight tracking at scale only',body:'−0.03em on 28px and above; zero below 20px. Negative tracking on a 13px label is the fastest way to make dense data illegible.'},
+        {title:'Uppercase stays micro',body:'Section captions in nav and card headers only, 11px at 600 with +0.04em. Never a full word of uppercase at body size.'},
+      ],
+
+      radiusSteps:[
+        {value:'24px',use:'App shell',demoStyle:{height:'52px',background:'var(--mb-teal-wash)',boxShadow:'inset 0 0 0 1px var(--mb-teal-ring)',borderRadius:'24px 24px 6px 6px'}},
+        {value:'16px',use:'Cards',demoStyle:{height:'46px',background:'var(--mb-teal-wash)',boxShadow:'inset 0 0 0 1px var(--mb-teal-ring)',borderRadius:'16px 16px 6px 6px'}},
+        {value:'12px',use:'Wells',demoStyle:{height:'40px',background:'var(--mb-teal-wash)',boxShadow:'inset 0 0 0 1px var(--mb-teal-ring)',borderRadius:'12px 12px 6px 6px'}},
+        {value:'10px',use:'Controls',demoStyle:{height:'34px',background:'var(--mb-teal-wash)',boxShadow:'inset 0 0 0 1px var(--mb-teal-ring)',borderRadius:'10px 10px 6px 6px'}},
+        {value:'999px',use:'Pills',demoStyle:{height:'28px',background:'var(--mb-teal-wash)',boxShadow:'inset 0 0 0 1px var(--mb-teal-ring)',borderRadius:'999px'}},
+      ],
+
+      elevationSteps:[
+        {name:'Rest',use:'Cards',demoStyle:{flex:1,padding:'14px',background:'var(--mb-surface)',borderRadius:'11px',boxShadow:'var(--mb-sh-1)'}},
+        {name:'Float',use:'Menus, tooltips',demoStyle:{flex:1,padding:'14px',background:'var(--mb-surface)',borderRadius:'11px',boxShadow:'var(--mb-sh-3)'}},
+        {name:'Shell',use:'App panel',demoStyle:{flex:1,padding:'14px',background:'var(--mb-surface)',borderRadius:'11px',boxShadow:'var(--mb-sh-4)'}},
+      ],
+
+      kpis:[
+        {icon:'groups',label:'Total Patients',value:'1,248',delta:'+12%',deltaIcon:'trending_up',
+         valueStyle:{fontFamily:disp,fontSize:'32px',fontWeight:700,letterSpacing:'-0.03em',lineHeight:1,color:'var(--mb-ink900)'},
+         deltaStyle:{fontSize:'12.5px',fontWeight:600,color:'var(--mb-up)'},
+         deltaIconStyle:{fontSize:'15px',color:'var(--mb-up)'}},
+        {icon:'percent',label:'Occupancy',value:'74%',delta:'−4%',deltaIcon:'trending_down',
+         valueStyle:{fontFamily:disp,fontSize:'32px',fontWeight:700,letterSpacing:'-0.03em',lineHeight:1,color:'var(--mb-ink900)'},
+         deltaStyle:{fontSize:'12.5px',fontWeight:600,color:'var(--mb-down)'},
+         deltaIconStyle:{fontSize:'15px',color:'var(--mb-down)'}},
+      ],
+
+      pills:[
+        pill('Available','var(--mb-success-bg)','var(--mb-success-fg)'),
+        pill('In Progress','var(--mb-info-bg)','var(--mb-info-fg)'),
+        pill('Pending','var(--mb-warning-bg)','var(--mb-warning-fg)'),
+        pill('Overdue','var(--mb-danger-bg)','var(--mb-danger-fg)'),
+        pill('Collected','var(--mb-success-bg)','var(--mb-success-fg)'),
+        pill('Not Started','var(--mb-neutral-bg)','var(--mb-neutral-fg)'),
+      ],
+      priorityPills:[
+        pill('Stat','var(--mb-danger-bg-strong)','var(--mb-danger-fg-strong)'),
+        pill('Urgent','var(--mb-urgent-bg)','var(--mb-urgent-fg)'),
+        pill('Routine','var(--mb-info-bg)','var(--mb-info-fg)'),
+        pill('Low','var(--mb-neutral-bg)','var(--mb-neutral-fg)'),
+      ],
+
+      detailRows:[
+        {icon:'badge',label:'License',value:'MED-003-2024',valueStyle:{fontFamily:"'IBM Plex Mono',monospace",fontSize:'13px',fontWeight:500,color:'var(--mb-ink800)'}},
+        {icon:'schedule',label:'Scheduled at',value:'Mon–Fri, 9AM–5PM',valueStyle:{fontSize:'13px',color:'var(--mb-ink750)'}},
+        {icon:'work_history',label:'Experience',value:'15 years',valueStyle:{fontSize:'13px',color:'var(--mb-ink750)'}},
+        {icon:'payments',label:'Claim Paid',value:'$4,250.00',valueStyle:{fontFamily:"'IBM Plex Mono',monospace",fontSize:'14px',fontWeight:600,color:'var(--mb-ink900)'}},
+      ],
+
+      navItems:[
+        {label:'OPD',icon:'inbox',active:false},
+        {label:'IPD & Beds',icon:'bed',active:false},
+        {label:'EMR/EHR',icon:'clinical_notes',active:true},
+        {label:'Pharmacy',icon:'medication',active:false},
+      ].map(n=>({...n,
+        style:{display:'flex',alignItems:'center',gap:'10px',padding:'9px 10px',borderRadius:'10px',fontSize:'13.5px',fontWeight:n.active?600:400,
+          color:n.active?'var(--mb-teal-text)':'var(--mb-ink620)',background:n.active?'var(--mb-teal-wash)':'transparent'},
+        iconStyle:{fontSize:'18px',color:n.active?'var(--mb-teal-text)':'var(--mb-ink450)'}})),
+
+      iconSet:['dashboard','inbox','bed','clinical_notes','surgical','science','radio','medication','groups','work','inventory_2','receipt_long','monitoring','settings','search','notifications','calendar_today','tune'],
+      iconRules:[
+        'One optical weight throughout — 300 at 18–22px. Never mix a filled icon into an outline set.',
+        'Icons take the Ink 400 tone by default and inherit currentColor when the row is active.',
+        'Rounded terminals only; the geometry should echo the radius scale, not fight it.',
+        'An icon accompanies a label almost always. Icon-only is reserved for header controls and row overflow.',
+      ],
+
+      meters:[
+        {name:'General Ward A',pct:'90%',detail:'34 / 55 beds · 21 available',fillStyle:{width:'90%',height:'100%',borderRadius:'999px',background:'var(--mb-meter-danger)'}},
+        {name:'Intensive Care',pct:'80%',detail:'37 / 46 beds · 23 available',fillStyle:{width:'80%',height:'100%',borderRadius:'999px',background:'var(--mb-meter-info)'}},
+        {name:'Pediatric Ward',pct:'50%',detail:'25 / 50 beds · 25 available',fillStyle:{width:'50%',height:'100%',borderRadius:'999px',background:'var(--mb-meter-ok)'}},
+      ],
+
+      densityNotes:[
+        {value:'32px',title:'Between containers',body:'Card-to-card and section-to-section. The most generous measure in the system, and the reason dense cards feel calm.'},
+        {value:'24px',title:'Card padding',body:'Inside a top-level card. Drops to 20px for a nested card and 16px for a well — padding shrinks with depth.'},
+        {value:'40px',title:'Row height, tables',body:'Comfortable rather than compact. Long shifts, small type, high stakes — the extra 6px is a legibility decision.'},
+        {value:'4 up',title:'KPI band',body:'Always four metric tiles across, equal width, directly under the page title. Consistent enough to become muscle memory.'},
+        {value:'2:1',title:'Content split',body:'Primary panel to secondary rail. Queues and charts left, alerts and pending items right.'},
+        {value:'1 · 2',title:'Title block',body:'One line of page title, one line of muted description. Every screen, no exceptions — it is how a user confirms where they are.'},
+      ],
+
+      conflicts:[
+        {n:'01',title:'Marketing display type vs product UI type',
+         tension:'Landing surfaces use a heavy geometric grotesk at extreme weight and tight tracking. Product screens use a neutral grotesk at regular weight. Both appear in the same collection, sometimes in the same image.',
+         cost:'Left undecided, the display voice creeps into table headers and field labels, where its tight tracking measurably hurts scanning of dense clinical data.',
+         rec:'Adopt both, but fence them. Display voice for page titles, KPI figures and marketing only. The product keeps its current UI family everywhere else — no exceptions inside a table or form.'},
+        {n:'02',title:'Saturated gradient environment vs flat app canvas',
+         tension:'Some references float the app on a vivid teal gradient; others show it flat, edge-to-edge, on near-white.',
+         cost:'A saturated gradient behind a full-screen enterprise tool wastes viewport, and at 100% zoom on a wide monitor the inset panel becomes a letterbox.',
+         rec:'Flat canvas inside the product; gradient reserved for login, marketing, empty states and print covers. Keep the hue relationship, drop the inset shell.'},
+        {n:'03',title:'Six chip hues vs five semantic states',
+         tension:'Violet and pink appear as chip fills alongside the five semantic hues — sometimes for a genuine state, sometimes apparently for variety.',
+         cost:'Once a hue carries no fixed meaning, users stop trusting all of them and read the label instead. That is the entire value of a colour-coded state gone.',
+         rec:'Five semantic pairs, strictly mapped. Violet only if it earns a distinct state of its own; pink retired. A hue with no meaning is not in the palette.'},
+        {n:'04',title:'Teal-only charts vs multi-hue charts',
+         tension:'Some charts are monochrome teal with gradient decay; others run green-versus-red or green-versus-violet series in the same visual style.',
+         cost:'Green and red in a series collide head-on with green and red as success and danger. A rising red revenue line reads as an alarm.',
+         rec:'Monochrome teal for single-series. For comparisons, a cool ordered sequence — teal, indigo, slate. Semantic green and red are never series colours.'},
+        {n:'05',title:'Near-invisible borders vs the accessibility floor',
+         tension:'The references lean so hard on tone and shadow that inputs and selects are often bounded by nothing perceptible at all.',
+         cost:'A control whose boundary is below 3:1 stops being findable — for low-vision users, on a dimmed laptop, or on any glare-lit ward screen.',
+         rec:'Keep the hairline aesthetic for dividers and card edges, which are decorative. Any control boundary that defines a hit area holds the 3:1 floor, even where that means a visibly stronger ring than the references show.'},
+      ],
+
+      changes:[
+        {title:'Neutral greys → cool-tinted neutrals',body:'A trace of the environment hue in every surface and ink value. Same lightness relationships, different temperature.'},
+        {title:'Blue accent → deep teal',body:'Same role, same one-full-strength-moment discipline. Teal reads more clinical and leaves blue free for the info state.'},
+        {title:'Radius up one step',body:'8px cards become 16px, 6px controls become 10px, badges go fully round. The scale keeps its proportional logic.'},
+        {title:'Shadows widen and cool',body:'Larger blur, lower opacity, tinted toward the ambient hue rather than neutral grey.'},
+        {title:'Chips lose their dot and border',body:'Tint fill with a darker foreground of the same hue. Structure identical; ornament removed.'},
+        {title:'Inset ring replaces border on inputs',body:'Visually lighter at the same measured contrast, so a dense form stops reading as a grid of boxes.'},
+        {title:'Charts gain gradient decay',body:'Thin stroke, fading fill, floating light tooltip, horizontal gridlines only.'},
+      ],
+      preserved:[
+        {title:'Information architecture',body:'Grouped sidebar, page title block, KPI band, queue-and-rail split. Not a navigation change.'},
+        {title:'Component structure and API',body:'Same components, same props, same states. This is a skin over the existing set.'},
+        {title:'Contrast floors',body:'4.5:1 for text on every surface it can land on including hover; 3:1 for control boundaries and meaningful non-text.'},
+        {title:'The token architecture',body:'Primitive → semantic → component, consumed from the external design system. Values move; the structure does not.'},
+        {title:'Dark theme parity',body:'Separately authored dark shadows, inverted accent foreground, per-theme status tints. Every change ships in both.'},
+        {title:'Density and hit targets',body:'Table rhythm and 44px minimum interactive targets. Softer surfaces must not mean smaller ones.'},
+        {title:'Motion discipline',body:'Short tokenised durations, one standard easing, reduced-motion honoured. No decorative gradient animation.'},
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
