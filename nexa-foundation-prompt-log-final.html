@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexa Design System · Foundation Prompt Log</title>
+<style>
+:root {
+  --canvas:#edf8f8; --surface:#fff; --inset:#f3f8f8; --ink:#16242b;
+  --muted:#61727a; --teal:#0b8f8d; --teal-dark:#086d6b; --teal-soft:#d9f2f0;
+  --border:#d7e5e5; --shadow:0 18px 45px rgba(26,70,75,.08);
+  --mono:"SFMono-Regular","SF Mono",Consolas,"Liberation Mono",Menlo,monospace;
+  --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);line-height:1.55}
+.shell{max-width:1120px;margin:auto;padding:56px 24px 80px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;margin-bottom:16px;color:var(--teal-dark);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+h1{margin:0;max-width:850px;font-size:clamp(38px,6vw,66px);line-height:.98;letter-spacing:-.045em;font-weight:760}
+.intro{max-width:760px;margin:24px 0 44px;color:var(--muted);font-size:18px;line-height:1.65}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+.meta span{padding:7px 11px;border:1px solid var(--border);border-radius:999px;background:#ffffffa8;color:var(--muted);font-size:12px;font-weight:700}
+.steps{display:grid;gap:12px}
+details.step{background:#ffffffd1;border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 7px 22px rgba(26,70,75,.04);transition:.2s ease}
+details.step[open]{background:var(--surface);border-color:#c7dddd;box-shadow:var(--shadow)}
+summary{list-style:none;cursor:pointer;padding:22px 24px;display:grid;grid-template-columns:48px 1fr 28px;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+.step-number{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--teal-soft);color:var(--teal-dark);font-size:13px;font-weight:850}
+.step-title{display:block;font-size:19px;font-weight:760;letter-spacing:-.02em}
+.step-subtitle{display:block;margin-top:3px;color:var(--muted);font-size:13px}
+.chevron{width:9px;height:9px;border-right:1.8px solid var(--muted);border-bottom:1.8px solid var(--muted);transform:rotate(45deg);transition:.2s ease;justify-self:center}
+details[open] .chevron{transform:rotate(225deg)}
+.step-content{padding:0 24px 28px 88px}
+.prompt-list{display:grid;gap:14px}
+.prompt-card{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:var(--inset)}
+.prompt-header{min-height:46px;padding:11px 52px 10px 16px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#ffffff7a}
+.prompt-label{color:var(--teal-dark);font-size:11px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.copy-button{position:absolute;top:8px;right:9px;width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:9px;background:transparent;color:var(--muted);cursor:pointer}
+.copy-button:hover{background:var(--teal-soft);color:var(--teal-dark)}
+.copy-button.copied{color:var(--teal-dark)}
+.copy-button svg{width:17px;height:17px}
+.prompt-text{margin:0;padding:20px;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:13px;line-height:1.75;color:#243238}
+.footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
+@media(max-width:700px){.shell{padding:36px 16px 60px}summary{grid-template-columns:40px 1fr 20px;gap:12px;padding:18px}.step-number{width:36px;height:36px;border-radius:10px}.step-content{padding:0 18px 22px}.prompt-text{padding:16px;font-size:12px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="eyebrow">Nexa Design System · Prompt Log</div>
+  <h1>Part 1: Building the Foundation</h1>
+  <p class="intro">The main prompts used to audit, normalize, structure and validate the foundation layer of the Nexa Design System.</p>
+  <div class="meta"><span>Foundation phase</span><span>6 steps</span><span>7 prompts</span><span>Claude Design</span></div>
+  <section class="steps" aria-label="Foundation phase prompt log">
+    
+    <details class="step">
+      <summary>
+        <span class="step-number">01</span>
+        <span>
+          <span class="step-title">Define Primitive Tokens</span>
+          <span class="step-subtitle">View the prompt used in this phase</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="step-content">
+        <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt 1</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">Analyze the existing UI and identify reusable design elements, design debt, inconsistencies, missing tokens, and opportunities for standardization. Categorize findings into Foundations, Navigation, Inputs, Actions, Display, Identity, Feedback and identify whether each should become a Token, Primitive Component, Composite Component or Pattern.</pre>
+        </article>
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt 2</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">Review the existing Foundation Library and refactor it into a designer-first Design System intended primarily for UX/UI designers working in Figma. Preserve all existing token values and design decisions, but improve how they are documented and presented. Replace implementation-oriented details (such as OKLCH values, CSS variables and engineering syntax) with designer-friendly documentation. For every colour token, present: Token Name, Light Theme (HEX + swatch), Dark Theme (HEX + swatch), Purpose, Recommended Usage, Avoid Using For, and UI Examples. Organize colours into categories such as Brand, Surface, Text, Border, Status and Interactive colours. Ensure every Light Theme token has a corresponding Dark Theme token, generating missing dark theme equivalents where necessary while maintaining accessibility and semantic consistency. Prioritize clarity, usability and visual examples over engineering implementation details.</pre>
+        </article></div>
+      </div>
+    </details>
+    <details class="step">
+      <summary>
+        <span class="step-number">02</span>
+        <span>
+          <span class="step-title">Creating Semantic Tokens</span>
+          <span class="step-subtitle">View the prompt used in this phase</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="step-content">
+        <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">The Foundation Tokens have now been finalized and organized under the Design Language section of the Pareo Design System.
+Before building reusable components, I want to establish an explicit Semantic Token layer that bridges the gap between Foundation Tokens and Components, following the same design methodology used in modern Figma Design Systems.
+Do not create any new visual styles or modify the existing Foundation Tokens.
+Instead, create a new documentation page under the Design Language section titled:
+Semantic Token Mapping
+This page should become the canonical reference that defines how every Foundation Token is consumed throughout the Design System.
+Objective
+Establish a clear dependency hierarchy:
+Foundation Tokens ↓ Semantic Tokens ↓ Components
+Components should reference Semantic Tokens, not Foundation Tokens directly.
+This relationship should be documented explicitly throughout the Design System.
+Build a Semantic Token Library
+Create semantic tokens that reference the existing Foundation Tokens.
+Do not duplicate HEX values, typography values, spacing values or other primitives.
+Every semantic token must map back to an existing Foundation Token.
+Organize semantic tokens into categories such as:
+Surface
+Surface / Primary
+Surface / Secondary
+Surface / Elevated
+Surface / Disabled
+Text
+Text / Primary
+Text / Secondary
+Text / Tertiary
+Text / Disabled
+Text / On Accent
+Action
+Action / Primary
+Action / Primary Hover
+Action / Secondary
+Action / Disabled
+Border
+Border / Default
+Border / Focus
+Border / Error
+Status
+Success
+Warning
+Error
+Info
+Icon
+Icon / Primary
+Icon / Secondary
+Icon / Disabled
+Expand these categories only if required by the current application.
+Build a Semantic Mapping Matrix
+On the same page, create a designer-friendly mapping matrix that clearly documents the relationships between tokens.
+The matrix should contain the following columns:
+Foundation TokenSemantic TokenUsed ByBrand / 500Action / PrimaryPrimary Button, Links, Active TabsGray / 900Text / PrimaryLabels, Table Cells, CardsGray / 100Surface / SecondaryCards, PanelsGray / 300Border / DefaultInputs, Cards
+Continue this matrix until every semantic token has a corresponding Foundation Token and documented usage.
+Theme Mapping
+Every semantic token should document:
+Light Theme Foundation Token
+Dark Theme Foundation Token
+Purpose
+Components that consume it
+If a corresponding Dark Theme mapping is missing, derive one using the existing Design Language while maintaining accessibility and semantic consistency.
+Future Component Integration
+This page should become the single source of truth for token relationships.
+When generating components in future iterations:
+Components should reference Semantic Tokens
+Components should never reference Foundation Tokens directly
+Multiple components sharing the same visual intent should reuse the same Semantic Token
+Documentation Style
+Present this documentation in a designer-first format similar to Figma Variables documentation.
+The page should help designers understand:
+Why semantic tokens exist
+How they relate to Foundation Tokens
+Which components consume them
+How changing a Foundation Token propagates through the Design System
+Use clear diagrams, tables and examples where appropriate.
+This page should serve as the missing bridge between Design Language and Components, ensuring a scalable and maintainable Design System architecture.</pre>
+        </article></div>
+      </div>
+    </details>
+    <details class="step">
+      <summary>
+        <span class="step-number">03</span>
+        <span>
+          <span class="step-title">Make token relationships explicit</span>
+          <span class="step-subtitle">View the prompt used in this phase</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="step-content">
+        <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">Expand the existing Semantic Relationship Matrix in the Nexa Design System to include the relationship between Semantic Tokens and the existing Components.
+This is an extension of the existing relationship model. Do not rebuild or replace the current Foundation → Semantic relationships. Preserve everything that already exists.
+1. Extend the relationship model
+The relationship model should now represent:
+Foundation → Semantic → Component → Property → State
+For example:
+Brand Accent  → Action / Primary  → Primary Button  → Background  → Default
+And:
+Brand Accent  → Action / Primary  → Primary Button  → Background  → Hover
+2. Use only existing components
+Use the Component Inventory and existing component detail pages as the source of truth.
+Do not create new components.
+Do not include patterns yet.
+Only map components that have already been identified from My Inventory v2.
+3. Map semantic tokens to component properties
+For each existing component, identify which semantic tokens control its relevant visual properties.
+Examples of properties may include:
+Background
+Text
+Icon
+Border
+Focus indicator
+Placeholder
+Selected state
+Disabled state
+Error state
+Elevation
+Only include properties that are actually relevant to that component.
+Do not create artificial mappings simply to complete the table.
+4. Include component states
+Where states already exist in the component documentation or are visibly represented in My Inventory v2, map the semantic relationship for each state.
+Examples:
+Default
+Hover
+Focus
+Selected
+Disabled
+Error
+Loading
+If a state is not currently defined or observed, do not invent it. Mark it as Not defined where useful.
+5. Preserve the existing semantic layer
+Components must reference the existing Semantic Tokens, not raw Foundation Token values.
+Do not:
+Create duplicate semantic tokens
+Rename semantic tokens
+Change token values
+Create new foundation tokens
+Replace the existing Foundation → Semantic relationship
+If a component currently uses a raw value and there is no appropriate semantic token, flag it as:
+Semantic mapping required
+Do not automatically invent a new semantic token.
+6. Designer-friendly matrix
+Keep the matrix understandable to designers.
+Add or use columns such as:
+ComponentPropertyStateSemantic TokenDesign Intent
+Example:
+| Primary Button | Background | Default | Action / Primary | Primary interactive emphasis |  | Primary Button | Label | Default | Text / On Accent | Text displayed on primary action |  | Primary Button | Background | Hover | Action / Primary Hover | Indicates interactive hover state |  | Primary Button | Focus | Focus | Border / Focus | Provides visible keyboard focus |
+Do not expose unnecessary engineering implementation details.
+7. Maintain traceability
+Each relationship should be traceable through the existing system:
+Foundation  ↓ Semantic Token  ↓ Component  ↓ Property  ↓ State
+The existing Foundation → Semantic relationship should remain the authoritative source for how semantic tokens resolve to foundation values.
+The component layer should explain where and why the semantic token is consumed, not duplicate the foundation values.
+8. Validation
+Before finalizing:
+Compare the mappings against the existing Component Inventory.
+Compare them against each component&#x27;s existing detail page.
+Compare the semantic tokens against the existing Semantic Relationship Matrix.
+Identify any component properties currently using raw values instead of semantic tokens.
+Identify any semantic tokens that currently have no component usage.
+Identify any ambiguous or missing relationships.
+Do not resolve ambiguity by inventing new tokens or relationships.
+At the end, provide a concise summary of:
+Number of components mapped
+Number of semantic → component relationships identified
+Number of component states mapped
+Any unmapped properties
+Any semantic tokens currently unused by components
+Any relationships requiring design review
+Important: This is a relationship-mapping and audit exercise. Do not redesign components, modify the UI, create patterns, or change the existing token architecture.</pre>
+        </article></div>
+      </div>
+    </details>
+    <details class="step">
+      <summary>
+        <span class="step-number">04</span>
+        <span>
+          <span class="step-title">Test primitive → semantic propagation</span>
+          <span class="step-subtitle">View the prompt used in this phase</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="step-content">
+        <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">I want to validate the token dependency model within the Pareo Design System.
+This is a verification exercise rather than a redesign.
+Update the following Foundation Token:
+Foundation Token
+Accent
+Current Values
+Light Theme
+#008E8E
+Dark Theme
+#00BEB7
+Replace them with:
+Light Theme
+#0B74FF
+Dark Theme
+#4F8CFF
+After updating the Foundation Token:
+1. Check whether every Semantic Token mapped to the Accent Foundation Token updates automatically.
+2. Verify whether every component referencing those Semantic Tokens also reflects the updated colour.
+3. Verify whether the application screens using those components update accordingly.</pre>
+        </article></div>
+      </div>
+    </details>
+    <details class="step">
+      <summary>
+        <span class="step-number">05</span>
+        <span>
+          <span class="step-title">Create a separate Semantic Relationship Matrix</span>
+          <span class="step-subtitle">View the prompt used in this phase</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="step-content">
+        <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">Create a new page under the existing Design Language section called Semantic Relationship Matrix.
+The purpose of this page is to document the current relationship between Foundation Tokens and Semantic Tokens in the Nexa Design System.
+Scope
+For this phase, document only:
+Foundation Token → Semantic Token → Design Intent
+Do not include components, patterns, screens, or other downstream relationships yet. Those will be added in a later phase once components have been created and validated.
+Build the matrix
+Review the existing Foundation Tokens and Semantic Token definitions already present in the Design System and create a clear mapping matrix.
+Use these columns:
+For each relationship:
+Reference the existing token names exactly as they are currently defined.
+Do not create new Foundation or Semantic Tokens.
+Do not rename existing tokens.
+Do not change token values.
+Clearly describe what design intent the semantic token represents.
+Include both Light and Dark theme values where applicable.
+If a semantic token does not currently have a clear Foundation relationship, flag it as Unmapped rather than inventing a relationship.
+If multiple semantic tokens derive from the same Foundation Token, show each relationship separately.
+Important distinction
+This page is not another Foundation Token documentation page.
+The Foundation Library explains what the foundational values are.
+The Semantic Token documentation explains what the semantic tokens mean.
+This matrix explains how the two layers are related.
+Designer-friendly presentation
+Keep the page easy for a designer to scan and understand.
+Avoid engineering terminology wherever possible.
+Use clear descriptions such as:
+Accent → Action / Primary → Primary interactive emphasis
+rather than implementation-focused descriptions.
+Do not over-engineer this
+This is the first version of the relationship model.
+Do not add:
+Component mappings
+Pattern mappings
+Screen mappings
+Code references
+Motion relationships
+Z-index / stacking relationships
+Engineering metadata
+Additional token categories
+Those relationships will be investigated later.
+Validation
+Before finalizing the page:
+Compare the matrix against the existing Foundation Tokens.
+Compare it against the existing Semantic Tokens.
+Ensure every documented relationship actually exists in the current Design System.
+Do not infer or invent relationships that aren&#x27;t explicitly supported by the existing system.
+Preserve all existing pages, navigation, tokens, values, and documentation.
+This is a documentation and relationship-mapping exercise only. Do not modify the existing Design System architecture or token definitions</pre>
+        </article></div>
+      </div>
+    </details>
+    <details class="step">
+      <summary>
+        <span class="step-number">06</span>
+        <span>
+          <span class="step-title">Organize the Foundation Layer</span>
+          <span class="step-subtitle">View the prompt used in this phase</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="step-content">
+        <div class="prompt-list">
+        <article class="prompt-card">
+          <div class="prompt-header"><span class="prompt-label">Prompt</span></div>
+          <button class="copy-button" type="button" aria-label="Copy prompt" title="Copy prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <pre class="prompt-text">The goal is to reorganize the existing content into a tab-based navigation structure, following the same interaction pattern and visual treatment already established for the Primary Button and Tab Bar component detail pages.
+
+IMPORTANT:
+This is an information architecture change, not a redesign.
+Preserve the existing visual language, typography, cards, spacing, token content, and examples wherever possible.
+
+Do NOT introduce a chatbot, reasoning panel, AI assistant, or any new enhancement.
+
+==================================================
+TAB STRUCTURE
+==================================================
+
+Create three tabs directly below the Semantic Tokens page header:
+
+1. Overview
+2. Token Library
+3. Mapping
+
+The tabs should use the same tab navigation pattern already established on the Primary Button and Tab Bar detail pages.
+
+==================================================
+TAB 1 — OVERVIEW
+==================================================
+
+Use this tab to explain the semantic token model.
+
+Keep the existing page introduction, but reorganize it into a concise overview.
+
+Include:
+
+- What semantic tokens are
+- Why they sit between foundation tokens and components
+- The one-way dependency model:
+
+Foundation Tokens
+↓
+Semantic Tokens
+↓
+Components
+
+Explain that:
+
+- Foundation tokens represent raw, context-free values.
+- Semantic tokens give those values an explicit design intent.
+- Components consume semantic tokens rather than directly referencing foundation values.
+- A semantic token can resolve differently by theme while preserving the same intent.
+
+Retain the existing &quot;How to read a semantic token&quot; section here.
+
+Keep the existing example:
+
+Action / Primary Hover
+
+and its:
+- Category
+- Role
+- Resolves To
+
+Also retain the high-level principles currently communicated on the page, such as:
+
+- One change, everywhere
+- Intent survives the value
+- Themes stop being a fork
+
+Do not invent additional principles.
+
+The Overview should be relatively short. It should explain the model, not repeat the entire token library.
+
+==================================================
+TAB 2 — TOKEN LIBRARY
+==================================================
+
+Move the existing semantic token category sections here.
+
+Preserve the existing categories and content exactly as currently defined.
+
+Organize them in the same order they currently appear:
+
+- Surface
+- Text
+- Action
+- Border
+- Status
+- Elevation
+- Any additional semantic categories already present on the page
+
+For each category, preserve:
+
+- Category description
+- Semantic token cards
+- Token name
+- Token variable name
+- Light value
+- Dark value
+- Purpose
+- Consumed By
+- Visual examples
+
+The individual token cards are important because they make semantic intent and usage explicit.
+
+Do not remove or consolidate token cards simply to make the page shorter.
+
+==================================================
+TAB 3 — MAPPING
+==================================================
+
+Move the existing &quot;Semantic Mapping Matrix&quot; section into this tab.
+
+This is NOT a separate &quot;Semantic Relationship Matrix&quot; page.
+
+The matrix should remain part of the Semantic Tokens documentation.
+
+Keep the existing columns:
+
+- Foundation Token
+- Semantic Token
+- Used By
+
+Preserve the existing rows and relationships.
+
+The purpose of this tab is to allow a designer or AI to trace the dependency chain:
+
+Foundation Token
+→ Semantic Token
+→ Component / Usage
+
+Add a short introductory sentence explaining that this matrix is the canonical reference for tracing how foundation values flow into semantic intent and ultimately into components.
+
+Do not create another relationship matrix elsewhere.
+
+==================================================
+PAGE HEADER
+==================================================
+
+Keep the existing page header:
+
+DESIGN LANGUAGE
+Semantic Tokens
+
+Retain the existing introductory positioning, but make it concise enough that the tab navigation can sit naturally below it.
+
+The header should establish:
+
+&quot;Semantic tokens give raw foundation values a name, purpose and context that components can consume.&quot;
+
+Do not over-explain AI here.
+
+==================================================
+NAVIGATION BEHAVIOUR
+==================================================
+
+The three tabs should behave like the tabs already established on the Primary Button and Tab Bar detail pages.
+
+Requirements:
+
+- Only one tab&#x27;s content is visible at a time.
+- Active tab has the existing design-system active treatment.
+- Switching tabs should preserve the page context.
+- The page should open on &quot;Overview&quot;.
+- Do not create separate routes unless the existing component-detail implementation already uses routes for tabs.
+- Follow the existing implementation pattern rather than introducing a new tab system.
+
+==================================================
+MVP CONSTRAINT
+==================================================
+
+Do NOT add:
+
+- Chat interface
+- AI reasoning panel
+- Relationship graph
+- Separate governance page
+- Separate Semantic Relationship Matrix
+- AI explanation panel
+- Search/filter functionality
+- Additional token-management features
+
+The purpose of this change is simply to make the existing semantic-token documentation easier to navigate.
+
+The final information architecture should be:
+
+Semantic Tokens
+
+[ Overview ] [ Token Library ] [ Mapping ]
+
+Overview
+→ Understand the semantic token model
+
+Token Library
+→ Explore the actual semantic tokens
+
+Mapping
+→ Trace Foundation → Semantic → Component relationships
+
+Keep everything else in the design system unchanged.</pre>
+        </article></div>
+      </div>
+    </details>
+  </section>
+  <div class="footer">Foundation phase prompt log · Nexa Design System · Prompts reproduced from the uploaded experiment log.</div>
+</main>
+<script>
+document.querySelectorAll("details.step").forEach(function(detail){
+  detail.addEventListener("toggle",function(){
+    if(!detail.open)return;
+    document.querySelectorAll("details.step").forEach(function(other){
+      if(other!==detail)other.removeAttribute("open");
+    });
+  });
+});
+document.querySelectorAll(".copy-button").forEach(function(button){
+  button.addEventListener("click",async function(event){
+    event.preventDefault(); event.stopPropagation();
+    const prompt=button.closest(".prompt-card").querySelector(".prompt-text").innerText;
+    try{await navigator.clipboard.writeText(prompt);}
+    catch(e){
+      const ta=document.createElement("textarea"); ta.value=prompt; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+    }
+    const original=button.innerHTML;
+    button.classList.add("copied"); button.title="Copied"; button.setAttribute("aria-label","Copied");
+    button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg>';
+    setTimeout(function(){
+      button.classList.remove("copied"); button.title="Copy prompt"; button.setAttribute("aria-label","Copy prompt"); button.innerHTML=original;
+    },1600);
+  });
+});
+</script>
+</body>
+</html>
