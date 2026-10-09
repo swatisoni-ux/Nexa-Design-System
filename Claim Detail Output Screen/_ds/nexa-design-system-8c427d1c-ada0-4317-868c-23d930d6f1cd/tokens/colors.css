@@ -1,0 +1,106 @@
+/* Nexa Design System — Color tokens.
+   Tier 1: Foundation (raw values, per theme). Tier 2: Semantic aliases (--sem-*).
+   Source of truth: swati-soni-ux/ai-native-design-system nexa-tokens.css. Components
+   consume Tier 2 only — never a Tier 1 value directly. */
+
+:root,[data-theme="light"]{
+  --bg:#F4FAFB; --surface:#FCFEFE; --surface2:#F0F7F8; --input-bg:#FCFEFE;
+  --border:#DFE6E8; --border-soft:#E9EEF0; --border-strong:#86959C;
+  --hover:#EBF6F7; --chip:#EDF1F2; --scrollbar:#C6D4D6;
+  --accent:#008E8E; --accent-hover:#00655E; --accent-soft:#DCF7F3; --accent-on-soft:#075957;
+  --text:#131C24; --text2:#343F47; --text3:#5F6B73; --text-disabled:#75828B;
+  --success-fg:#006344; --success-bg:#D9F8EF;
+  --warning-fg:#814D00; --warning-bg:#FFF0D0;
+  --danger-fg:#AF3433;  --danger-bg:#FFE9E6; --danger-strong:#C53637;
+  --info-fg:#285994;    --info-bg:#E2F2FF;
+  --violet-fg:#674698;  --violet-bg:#F3EBFF;
+  --neutral-fg:#59656E; --neutral-bg:#EDF1F2;
+  --on-accent:#FFFFFF; --focus:#00655E;
+  --avatar-bg:#97D1CD; --avatar-fg:#093B3B;
+  --toast-bg:#0C2327; --toast-fg:#EEF7F7; --toast-icon:#5CDDC4;
+  --shadow-1:0 1px 2px rgba(58,110,116,0.05), 0 6px 18px rgba(58,110,116,0.06);
+  --shadow-2:0 1px 2px rgba(58,110,116,0.05), 0 14px 40px rgba(58,110,116,0.08);
+  --shadow-3:0 2px 4px rgba(58,110,116,0.05), 0 16px 40px rgba(58,110,116,0.11);
+  --shadow-4:0 4px 8px rgba(58,110,116,0.06), 0 24px 56px rgba(58,110,116,0.16);
+  color-scheme:light;
+}
+[data-theme="dark"]{
+  --bg:#181E24; --surface:#1D2429; --surface2:#151B20; --input-bg:#1D2429;
+  --border:#32373D; --border-soft:#2B3136; --border-strong:#6E767C;
+  --hover:#272F35; --chip:#2F353A; --scrollbar:#474E54;
+  --accent:#00BEB7; --accent-hover:#61DBD1; --accent-soft:#0F3434; --accent-on-soft:#78E3DB;
+  --text:#EEF5F7; --text2:#C8D1D6; --text3:#9CA4AA; --text-disabled:#848C91;
+  --success-fg:#55DDAA; --success-bg:#083C2D;
+  --warning-fg:#FBC456; --warning-bg:#483000;
+  --danger-fg:#FF877F;  --danger-bg:#512320; --danger-strong:#FF877F;
+  --info-fg:#8BC4FF;    --info-bg:#1A314E;
+  --violet-fg:#CBAAFF;  --violet-bg:#3A2E50;
+  --neutral-fg:#A3AAB0; --neutral-bg:#2D3237;
+  --on-accent:#051213; --focus:#20BFBC;
+  --avatar-bg:#085955; --avatar-fg:#D9F6F1;
+  --toast-bg:#0E1C1E; --toast-fg:#EEF7F7; --toast-icon:#64E4CA;
+  --shadow-1:0 1px 2px rgba(6,10,14,0.50), 0 6px 18px rgba(6,10,14,0.42);
+  --shadow-2:0 1px 2px rgba(6,10,14,0.50), 0 14px 40px rgba(5,9,13,0.48);
+  --shadow-3:0 2px 4px rgba(5,9,13,0.52), 0 16px 40px rgba(4,8,12,0.55);
+  --shadow-4:0 4px 8px rgba(4,8,12,0.55), 0 24px 56px rgba(3,7,11,0.62);
+  color-scheme:dark;
+}
+
+/* ---------- Tier 2 · Semantic ---------- */
+:root,[data-theme]{
+  --sem-surface-canvas:var(--bg);
+  --sem-surface-primary:var(--surface);
+  --sem-surface-secondary:var(--surface2);
+  --sem-surface-elevated:var(--surface);
+  --sem-surface-field:var(--input-bg);
+  --sem-surface-chip:var(--chip);
+  --sem-surface-selected:var(--accent-soft);
+  --sem-surface-disabled:var(--chip);
+  --sem-surface-inverted:var(--toast-bg);
+  --sem-surface-avatar:var(--avatar-bg);
+
+  --sem-text-primary:var(--text);
+  --sem-text-secondary:var(--text2);
+  --sem-text-tertiary:var(--text3);
+  --sem-text-disabled:var(--text-disabled);
+  --sem-text-on-accent:var(--on-accent);
+  --sem-text-on-inverted:var(--toast-fg);
+  --sem-text-link:var(--accent-on-soft);
+  --sem-text-avatar:var(--avatar-fg);
+
+  --sem-action-primary:var(--accent);
+  --sem-action-primary-hover:var(--accent-hover);
+  --sem-action-secondary-fg:var(--accent-on-soft);
+  --sem-action-secondary-border:var(--border-strong);
+  --sem-action-secondary-hover:var(--hover);
+  --sem-action-disabled-bg:var(--chip);
+  --sem-action-disabled-fg:var(--text-disabled);
+  --sem-action-destructive:var(--danger-strong);
+
+  --sem-border-default:var(--border);
+  --sem-border-subtle:var(--border-soft);
+  --sem-border-interactive:var(--border-strong);
+  --sem-border-focus:var(--focus);
+  --sem-border-error:var(--danger-strong);
+  --sem-border-scrollbar:var(--scrollbar);
+
+  --sem-status-success-bg:var(--success-bg); --sem-status-success-fg:var(--success-fg);
+  --sem-status-warning-bg:var(--warning-bg); --sem-status-warning-fg:var(--warning-fg);
+  --sem-status-error-bg:var(--danger-bg);    --sem-status-error-fg:var(--danger-fg);
+  --sem-status-error-strong:var(--danger-strong);
+  --sem-status-info-bg:var(--info-bg);       --sem-status-info-fg:var(--info-fg);
+  --sem-status-review-bg:var(--violet-bg);   --sem-status-review-fg:var(--violet-fg);
+  --sem-status-neutral-bg:var(--neutral-bg); --sem-status-neutral-fg:var(--neutral-fg);
+
+  --sem-icon-primary:var(--text2);
+  --sem-icon-secondary:var(--text3);
+  --sem-icon-accent:var(--accent-on-soft);
+  --sem-icon-on-accent:var(--on-accent);
+  --sem-icon-on-inverted:var(--toast-icon);
+  --sem-icon-disabled:var(--text-disabled);
+
+  --sem-elevation-resting:var(--shadow-1);
+  --sem-elevation-raised:var(--shadow-2);
+  --sem-elevation-floating:var(--shadow-3);
+  --sem-elevation-overlay:var(--shadow-4);
+}
