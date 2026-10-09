@@ -1,0 +1,5 @@
+/* Shared keyframes for floating UI (dropdowns, toasts). Referenced by inline `animation` styles
+   in components/data-display/Dropdown.jsx and the Claims Workspace UI kit. */
+@keyframes om-pop-in{from{opacity:0;transform:translateY(-4px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes om-toast-in{from{opacity:0;transform:translateX(-50%) translateY(8px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:1ms !important;animation-duration:1ms !important;}}
